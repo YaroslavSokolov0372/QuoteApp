@@ -20,37 +20,180 @@ struct HomeSketch: View {
                 
         ]
     }
+    @Namespace var animation
+    
+
+
     
     @State var playAnimation: Bool = false
     @State var count: Int = 0
     @State private var fontSize = 32.0
     @State var draggOffset: CGFloat = 0
+    @State var offsetOfCurrentIndex: CGFloat = 0
+    
+    @State var mainnumber: [Int] = [3, 4]
 
     var body: some View {
-//        Button {
-//            withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 1)) {
-//                if fontSize == 72 { fontSize = 32 } else { fontSize = 72 }
-//            }
-//        } label: {
-//            Text("32")
-//                .animatableFont(size: fontSize)
-//        }
+        VStack {
+            ForEach(sortedArrayOfNumbers, id: \.self) { num in
+                //                NumberView(num, currentIndex: currentIndex)
+                //                    .offset(y: -330)
+                VStack(alignment: .leading) {
+                    Spacer()
+                        .frame(height: arrayOfNumbers[currentIndex] == num ? 40 : 0)
+                    VStack {
+                        Text(num != nil ? String(describing: num!) : "")
+                            .font(.system(size: arrayOfNumbers[currentIndex] == num ? 100 : 70))
+                            .transition(.opacity)
 
-        Button {
-            self.playAnimation.toggle()
-            
-        } label: {
-            Text(playAnimation ? "1" : "3")
-                .font(.system(size: 100))
+                        Text(num != nil ? "quotes from friends" : "")
+
+                    }
+                        .offset(y: arrayOfNumbers[currentIndex] == num ? offsetOfCurrentIndex : 0)
+                        .gesture(
+                            DragGesture(minimumDistance: 0.6)
+                                .onChanged({ value in
+                                    self.offsetOfCurrentIndex = value.translation.height / 3.5
+                                    playAnimation = false
+                                })
+                                .onEnded({ value in
+                                    if offsetOfCurrentIndex > 26 {
+                                        withAnimation(.easeOut(duration: 0.25)){
+                                            self.offsetOfCurrentIndex = 0
+                                            self.currentIndex += 1
+                                            print(currentIndex)
+                                        }
+                                    } else {
+                                        withAnimation {
+                                            self.offsetOfCurrentIndex = 0
+                                        }
+                                    }
+                                })
+                        )
+
+//                        .matchedGeometryEffect(id: num.self, in: animation)
+
+                }
+
+
+//                .offset(y: -330)
+
+//                .offset(y: Double(currentIndex) * 130)
+//                .transition(.opacity)
+
+
+            }
         }
-        .animation(.easeInOut, value: playAnimation)
-            
-//            .onTapGesture {
-//                withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 1)) {
-//                    fontSize = 72
-//                }
+        .frame(maxWidth: 100, maxHeight: 800)
+
+
+        VStack {
+            ForEach(arrayOfNumbers.reversed(), id: \.self) { num in
+                Text(String(num))
+                    .font(.system(size: arrayOfNumbers[currentIndex] == num ? 100 : 50))
+                    .offset(y: arrayOfNumbers[currentIndex] == num ? offsetOfCurrentIndex : 0)
+
+                    .gesture(
+                        DragGesture(minimumDistance: 0.6)
+                            .onChanged({ value in
+                                self.offsetOfCurrentIndex = value.translation.height
+                                playAnimation = false
+                            })
+                            .onEnded({ value in
+                                if offsetOfCurrentIndex > 26 {
+                                    withAnimation(.easeOut(duration: 0.5)){
+                                        self.offsetOfCurrentIndex = 0
+                                        self.currentIndex += 1
+                                        print(currentIndex)
+                                    }
+                                } else {
+                                    withAnimation {
+                                        self.offsetOfCurrentIndex = 0
+                                    }
+                                }
+                            })
+                    )
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .offset(y: 60 * Double(currentIndex))
+
+
+        VStack {
+            Text("3")
+                .font(currentIndex > 0 ? .system(size: 100) : .system(size: 60))
+            Text("4")
+                .font(currentIndex <= 0 ? .system(size: 100) : .system(size: 60))
+                .offset(y: offsetOfCurrentIndex)
+                .gesture(
+                    DragGesture(minimumDistance: 0.6)
+                        .onChanged({ value in
+                            self.offsetOfCurrentIndex = value.translation.height
+                            playAnimation = false
+                        })
+                        .onEnded({ value in
+                            if offsetOfCurrentIndex > 26 {
+                                withAnimation(.easeOut(duration: 0.5)){
+                                    self.offsetOfCurrentIndex = 0
+                                    self.currentIndex += 1
+                                    print(currentIndex)
+                                }
+                            } else {
+                                withAnimation {
+                                    self.offsetOfCurrentIndex = 0
+                                }
+                            }
+                        })
+                )
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .offset(y: 80 * Double(currentIndex))
+        
+//        VStack {
+//            ForEach(arrayOfNumbers.reversed(), id: \.self) { num in
+//                NumberView(num, currentIndex: currentIndex)
+//                    .offset(y: -300)
 //            }
+//
+//        }
+//        .frame(width: 50, height: 50)
+        
     }
+    
+    @ViewBuilder
+    func NumberView(_ number: Int, currentIndex: Int) -> some View {
+        VStack(alignment: .leading) {
+            Spacer()
+                .frame(height: 40)
+            Text(String(describing: number))
+                .font(.system(size: arrayOfNumbers[currentIndex] == number ? 100 : 70))
+                .offset(y: arrayOfNumbers[currentIndex] == number ? offsetOfCurrentIndex : 0)
+                .gesture(
+                    DragGesture(minimumDistance: 0.6)
+                        .onChanged({ value in
+                            self.offsetOfCurrentIndex = value.translation.height
+                            playAnimation = false
+                        })
+                        .onEnded({ value in
+                            if offsetOfCurrentIndex > 26 {
+                                withAnimation(.easeOut(duration: 0.3)){
+                                    self.offsetOfCurrentIndex = 0
+                                    self.currentIndex += 1
+                                    print(currentIndex)
+                                }
+                            } else {
+                                withAnimation {
+                                    self.offsetOfCurrentIndex = 0
+                                }
+                            }
+                        })
+                )
+        }
+        .offset(y: Double(currentIndex) * 130)
+        .transition(.opacity)
+    }
+    
+    
 }
 
 
@@ -83,5 +226,7 @@ extension View {
 }
 
 // An example View trying it out
+
+
 
 
