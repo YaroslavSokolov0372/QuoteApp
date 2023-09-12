@@ -7,10 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D15FBC1E2AA28FAF00D10B3D /* HomeSketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15FBC1D2AA28FAF00D10B3D /* HomeSketch.swift */; };
-		D1847DEF2AA4D99100048CFE /* HomeSketch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1847DEE2AA4D99100048CFE /* HomeSketch2.swift */; };
-		D1847DF12AA4E6BD00048CFE /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1847DF02AA4E6BD00048CFE /* TransitionExtension.swift */; };
 		D19C6C3D2AA08DB5004E4D58 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */; };
+		D1C4BC362AACBEF7002F954D /* GradientColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC352AACBEF7002F954D /* GradientColors.swift */; };
+		D1C4BC482AACE27D002F954D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC472AACE27D002F954D /* Fonts.swift */; };
+		D1C4BC492AACE27D002F954D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC472AACE27D002F954D /* Fonts.swift */; };
+		D1C4BC4A2AACE27D002F954D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC472AACE27D002F954D /* Fonts.swift */; };
+		D1C4BC4F2AACE9C1002F954D /* Halenoir-BlackOutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4C2AACE9C1002F954D /* Halenoir-BlackOutline.ttf */; };
+		D1C4BC502AACE9C1002F954D /* Halenoir-BlackOutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4C2AACE9C1002F954D /* Halenoir-BlackOutline.ttf */; };
+		D1C4BC512AACE9C1002F954D /* Halenoir-BlackOutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4C2AACE9C1002F954D /* Halenoir-BlackOutline.ttf */; };
+		D1C4BC522AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4D2AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf */; };
+		D1C4BC532AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4D2AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf */; };
+		D1C4BC542AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4D2AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf */; };
+		D1C4BC552AACE9C1002F954D /* Halenoir-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */; };
+		D1C4BC562AACE9C1002F954D /* Halenoir-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */; };
+		D1C4BC572AACE9C1002F954D /* Halenoir-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */; };
+		D1C4BC592AACF03D002F954D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC582AACF03D002F954D /* Test.swift */; };
+		D1C4BC5A2AACF03D002F954D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC582AACF03D002F954D /* Test.swift */; };
+		D1C4BC5B2AACF03D002F954D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC582AACF03D002F954D /* Test.swift */; };
 		D1D7E8A22A9F7E530087CFD3 /* QuoteAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8A12A9F7E530087CFD3 /* QuoteAppApp.swift */; };
 		D1D7E8A42A9F7E530087CFD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8A32A9F7E530087CFD3 /* ContentView.swift */; };
 		D1D7E8A62A9F7E530087CFD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1D7E8A52A9F7E530087CFD3 /* Assets.xcassets */; };
@@ -41,10 +54,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D15FBC1D2AA28FAF00D10B3D /* HomeSketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSketch.swift; sourceTree = "<group>"; };
-		D1847DEE2AA4D99100048CFE /* HomeSketch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSketch2.swift; sourceTree = "<group>"; };
-		D1847DF02AA4E6BD00048CFE /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		D1C4BC352AACBEF7002F954D /* GradientColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColors.swift; sourceTree = "<group>"; };
+		D1C4BC472AACE27D002F954D /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		D1C4BC4B2AACE39B002F954D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D1C4BC4C2AACE9C1002F954D /* Halenoir-BlackOutline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Halenoir-BlackOutline.ttf"; sourceTree = "<group>"; };
+		D1C4BC4D2AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ApproachMonoTRIAL-Md.ttf"; sourceTree = "<group>"; };
+		D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Halenoir-Black.ttf"; sourceTree = "<group>"; };
+		D1C4BC582AACF03D002F954D /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		D1D7E89E2A9F7E530087CFD3 /* QuoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D7E8A12A9F7E530087CFD3 /* QuoteAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteAppApp.swift; sourceTree = "<group>"; };
 		D1D7E8A32A9F7E530087CFD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,14 +106,24 @@
 			isa = PBXGroup;
 			children = (
 				D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */,
-				D1847DF02AA4E6BD00048CFE /* TransitionExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		D1C4BC5C2AAF2007002F954D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D1C4BC4D2AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf */,
+				D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */,
+				D1C4BC4C2AACE9C1002F954D /* Halenoir-BlackOutline.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D1D7E8952A9F7E530087CFD3 = {
 			isa = PBXGroup;
 			children = (
+				D1C4BC582AACF03D002F954D /* Test.swift */,
 				D1D7E8A02A9F7E530087CFD3 /* QuoteApp */,
 				D1D7E8B62A9F7E530087CFD3 /* QuoteAppTests */,
 				D1D7E8C02A9F7E530087CFD3 /* QuoteAppUITests */,
@@ -117,12 +144,14 @@
 		D1D7E8A02A9F7E530087CFD3 /* QuoteApp */ = {
 			isa = PBXGroup;
 			children = (
+				D1C4BC5C2AAF2007002F954D /* Fonts */,
 				D19C6C3B2AA08DA2004E4D58 /* Extension */,
 				D1D7E8D32A9F7EDA0087CFD3 /* ViewModel */,
 				D1D7E8D22A9F7ED10087CFD3 /* Model */,
 				D1D7E8D12A9F7EC20087CFD3 /* View */,
 				D1D7E8A52A9F7E530087CFD3 /* Assets.xcassets */,
 				D1D7E8AA2A9F7E530087CFD3 /* Persistence.swift */,
+				D1C4BC4B2AACE39B002F954D /* Info.plist */,
 				D1D7E8AC2A9F7E530087CFD3 /* QuoteApp.xcdatamodeld */,
 				D1D7E8A72A9F7E530087CFD3 /* Preview Content */,
 			);
@@ -160,8 +189,6 @@
 				D1D7E8A12A9F7E530087CFD3 /* QuoteAppApp.swift */,
 				D1D7E8A32A9F7E530087CFD3 /* ContentView.swift */,
 				D1D7E8D42A9F7EE50087CFD3 /* Home.swift */,
-				D15FBC1D2AA28FAF00D10B3D /* HomeSketch.swift */,
-				D1847DEE2AA4D99100048CFE /* HomeSketch2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,6 +196,8 @@
 		D1D7E8D22A9F7ED10087CFD3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D1C4BC352AACBEF7002F954D /* GradientColors.swift */,
+				D1C4BC472AACE27D002F954D /* Fonts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,7 +314,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1D7E8A92A9F7E530087CFD3 /* Preview Assets.xcassets in Resources */,
+				D1C4BC522AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf in Resources */,
 				D1D7E8A62A9F7E530087CFD3 /* Assets.xcassets in Resources */,
+				D1C4BC552AACE9C1002F954D /* Halenoir-Black.ttf in Resources */,
+				D1C4BC4F2AACE9C1002F954D /* Halenoir-BlackOutline.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +325,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C4BC502AACE9C1002F954D /* Halenoir-BlackOutline.ttf in Resources */,
+				D1C4BC562AACE9C1002F954D /* Halenoir-Black.ttf in Resources */,
+				D1C4BC532AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +335,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C4BC512AACE9C1002F954D /* Halenoir-BlackOutline.ttf in Resources */,
+				D1C4BC572AACE9C1002F954D /* Halenoir-Black.ttf in Resources */,
+				D1C4BC542AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,13 +348,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C4BC482AACE27D002F954D /* Fonts.swift in Sources */,
+				D1C4BC362AACBEF7002F954D /* GradientColors.swift in Sources */,
+				D1C4BC592AACF03D002F954D /* Test.swift in Sources */,
 				D1D7E8AE2A9F7E530087CFD3 /* QuoteApp.xcdatamodeld in Sources */,
-				D1847DEF2AA4D99100048CFE /* HomeSketch2.swift in Sources */,
-				D15FBC1E2AA28FAF00D10B3D /* HomeSketch.swift in Sources */,
 				D1D7E8AB2A9F7E530087CFD3 /* Persistence.swift in Sources */,
 				D1D7E8D52A9F7EE50087CFD3 /* Home.swift in Sources */,
 				D19C6C3D2AA08DB5004E4D58 /* ArrayExtension.swift in Sources */,
-				D1847DF12AA4E6BD00048CFE /* TransitionExtension.swift in Sources */,
 				D1D7E8A42A9F7E530087CFD3 /* ContentView.swift in Sources */,
 				D1D7E8A22A9F7E530087CFD3 /* QuoteAppApp.swift in Sources */,
 			);
@@ -326,7 +364,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C4BC492AACE27D002F954D /* Fonts.swift in Sources */,
 				D1D7E8B82A9F7E530087CFD3 /* QuoteAppTests.swift in Sources */,
+				D1C4BC5A2AACF03D002F954D /* Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +375,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1D7E8C42A9F7E530087CFD3 /* QuoteAppUITestsLaunchTests.swift in Sources */,
+				D1C4BC5B2AACF03D002F954D /* Test.swift in Sources */,
+				D1C4BC4A2AACE27D002F954D /* Fonts.swift in Sources */,
 				D1D7E8C22A9F7E530087CFD3 /* QuoteAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +521,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"QuoteApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuoteApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -507,6 +550,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"QuoteApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuoteApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

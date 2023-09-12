@@ -20,7 +20,6 @@ struct Home: View {
     var intRandom = Int.random(in: 0...6)
     var colors: [Color] = [.indigo, .brown, .orange, .red, .green, .gray, .blue]
     
-    
     var sortedArrayOfNumbers: [Int?] {
         return [arrayOfNumbers.nextElementAfter(currentIndex + 1) ?? nil,
                 arrayOfNumbers.nextElementAfter(currentIndex) ?? nil,
@@ -29,27 +28,16 @@ struct Home: View {
         ]
     }
     
-//    func offsetXRectangle(num: Int, curerntIndex: Int ) -> Double {
-//        var solution: Double = 0
-//        var numberToMinus: Double = 0
-//        var index = 0
-//        let reactNum = num - currentIndex
-//
-//        if reactNum == 0 {
-//
-//            return 0
-//        } else if reactNum == 1 {
-//            return 70
-//        } else {
-//            solution = 70 * Double(num)
-//            while index != num {
-//                numberToMinus += Double(index) * 10
-//                index += 1
-//            }
-//            solution -= numberToMinus
-//            return solution
-//        }
-//    }
+    var sortedArrayOfNumbers3: [Int?] {
+        return [
+//            arrayOfNumbers.nextElementAfter(currentIndex + 1) ?? nil,
+                arrayOfNumbers.nextElementAfter(currentIndex) ?? nil,
+                arrayOfNumbers[currentIndex],
+                arrayOfNumbers.elementBefore(currentIndex) ?? nil
+        ]
+    }
+    
+    
     
     func offsetXRectangle(num: Int, curerntIndex: Int ) -> Double {
         var solution: Double = 0
@@ -85,11 +73,9 @@ struct Home: View {
         
         if reactNum == 0 {
             solution = -45
-//            print("solution to Y -", solution)
             return solution
         } else if reactNum == 1 {
             solution = -90
-//            print("solution to Y -", solution)
             return solution
         } else if reactNum < 0 {
             return 700
@@ -101,11 +87,8 @@ struct Home: View {
                 index += 1
             }
             solution = -45 * Double(reactNum + 1)
-//            print("solution to Y -", solution * numberToMinus)
             solution = solution + numberToMinus
-//            print(solution)
             return solution
-//            solution + numberToMinus
         }
         
     }
@@ -123,86 +106,170 @@ struct Home: View {
     var body: some View {
 
             ZStack {
+                //MARK: -Rectangles
                 ForEach(arrayOfNumbers.indices.reversed(), id: \.self) { num in
-                    
                         Rectangle()
-                            .fill(colors[num])
-//                            .tag(num)
+//                            .fill(colors[num])
+                        .fill(gradients[num])
+//                        .fill(gri)
                             .frame(width: 500, height: 600)
                             .offset(x: offsetXRectangle(num: num, curerntIndex: currentIndex), y: offsetYRectangle(num: num, currentIndex: currentIndex))
-//                            .rotationEffect(.degrees(-33 + (6 * Double(num))), anchor: .topTrailing)
-//                            .rotationEffect(.degrees((currentIndex - 1) == num ? -0 : 0), anchor: .trailing)
-//                            .rotationEffect(.degrees(num < currentIndex ? -45 : 0), anchor: .trailing)
-//                            .rotationEffect(.degrees(num < currentIndex ? -30 : 0), anchor: .top)
                             .rotationEffect(.degrees(num < currentIndex ? -90 : rotationDegrees(num: num, currentIndex: currentIndex)), anchor: .topTrailing)
-//                            .offset(x: num < currentIndex ? 130 : 0 ,y: num < currentIndex ? 600 : 0)
-//                            .offset(y: num < currentIndex ? 300 : 0)
-                    
-                    
-                        
+                            .animation(.easeIn(duration: 0.33), value: currentIndex)
+    
                 }
 
+                //MARK: -QuotesCollections
+                
+                    
+                    
+                    VStack {
+                        ForEach(sortedArrayOfNumbers, id: \.self) { num in
+                            NumberViewOutlined(num, currentIndex: currentIndex)
+                        }
+                        .animation(.default.speed(1), value: currentIndex)
+
+                    }
+                    .offset(x: -30, y: 70)
+                    VStack {
+                        ForEach(sortedArrayOfNumbers3, id: \.self) { num in
+                            NumberViewFilled(num, currentIndex: currentIndex)
+                        }
+                        .animation(.default.speed(1), value: currentIndex)
+
+                    }
+                    .offset(x: -30, y: 150)
+                
                 //MARK: -Title and MenuBar
                 HStack {
                     VStack {
-                        VStack {
-                            Text("My Quotes")
-                                .font(.system(size: 40))
-                                .bold()
-                                .padding(.leading, 30)
-                            
-                            Spacer()
-                        }
-                        .frame(height: 150)
-                            VStack {
-                                ForEach(sortedArrayOfNumbers, id: \.self) { num in
-                                    NumberView(num, currentIndex: currentIndex)
-                                }
-                            }
-                            .frame(height: 600)
-                        }
-                        .padding(.top, 20)
-                        .frame(width: 260)
-                        .offset(x: 10)
-                        
-                    VStack {
-                        Text("ManuButton")
+                        Text("My Quotes")
+                            .customFont(37, .mono)
+                            .padding(.leading, 50)
                         
                         Spacer()
+                            .frame(height: 670)
+                    }
+                    .frame(width: 300)
+                    
+                    VStack {
+                            Button {
+                                
+                            } label: {
+                                Image("menuImage")
+                                    .resizable()
+                                    .frame(width: 30, height: 25)
+                            }
+                            .padding(.leading)
+                            
+                        
+                        Spacer()
+                        
+                        Button {
+                            
+                        } label: {
+                            Image("plusImage")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                        }
+                        .padding(.trailing)
+                        Spacer()
+                            .frame(height: 170)
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
             }
         }
     
     
     @ViewBuilder
-    func NumberView(_ number: Int?, currentIndex: Int) -> some View {
+//    func NumberView(_ number: Int?, currentIndex: Int) -> some View {
+//        VStack(alignment: .leading) {
+//            Spacer()
+////                .frame(height: 40)
+//            Text(number != nil ? String(number!) : "")
+////                .font(.system(size: arrayOfNumbers[currentIndex] == number ? 100 : 70))
+//
+//                .customFont(arrayOfNumbers[currentIndex] == number ? 90 : 70,  arrayOfNumbers[currentIndex] == number ? .halenoir : .halenoirOutline)
+//
+//                .offset(y: arrayOfNumbers[currentIndex] == number ? draggOffset : 0)
+//                .gesture(
+//                    DragGesture(minimumDistance: 0.6)
+//                        .onChanged({ value in
+//                            self.draggOffset = value.translation.height / 3.5
+//                            playAnimation = false
+//                            print(draggOffset)
+//                        })
+//                        .onEnded({ value in
+//                            if draggOffset > 26 {
+//                                withAnimation(.easeOut(duration: 3.35)){
+//                                    self.draggOffset = 0
+//                                    self.currentIndex += 1
+////                                    print(currentIndex)
+//                                }
+//                            } else if draggOffset < -20 {
+//                                withAnimation(.easeOut(duration: 0.2)){
+//                                    self.draggOffset = 0
+//                                    self.currentIndex -= 1
+////                                    print(currentIndex)
+//                                }
+//                            }
+//                            else {
+//                                withAnimation {
+//                                    self.draggOffset = 0
+//                                }
+//                            }
+//                        })
+//                )
+//            Text(number != nil ? "quotes from friends" : "")
+//                .customFont(15, .mono)
+//        }
+//
+//        .frame(height: arrayOfNumbers[currentIndex] == number ? 200 : 130)
+//        .offset(y: -30)
+//    }
+    
+    func NumberViewOutlined(_ number: Int?, currentIndex: Int) -> some View {
+        VStack(alignment: .leading) {
+            Text(number != nil ? String(number!) : "")
+                .customFont(70, .halenoirOutline)
+            Text(number != nil ? "quotes from friends" : "")
+                .customFont(15, .mono)
+        }
+        .opacity(number == arrayOfNumbers[currentIndex] ? 0 : 1)
+        .frame(width: 200 ,height: arrayOfNumbers[currentIndex] == number ? 160 : 150)
+    }
+    
+    func NumberViewFilled(_ number: Int?, currentIndex: Int) -> some View {
         VStack(alignment: .leading) {
             Spacer()
-//                .frame(height: 40)
-            Text(number != nil ? String(describing: number!) : "")
-                .font(.system(size: arrayOfNumbers[currentIndex] == number ? 100 : 70))
-                .offset(y: arrayOfNumbers[currentIndex] == number ? draggOffset : 0)
+            
+            
+            Text(number != nil ? String(number!) :  "")
+                .customFont(number == arrayOfNumbers[currentIndex] ? 90 : 70, .halenoir)
+                .offset(y: number == arrayOfNumbers[currentIndex] ? draggOffset : 0)
+                
                 .gesture(
                     DragGesture(minimumDistance: 0.6)
                         .onChanged({ value in
                             self.draggOffset = value.translation.height / 3.5
-                            playAnimation = false
-                            print(draggOffset)
+                            //                                    playAnimation = false
+                            //                                    print(draggOffset)
                         })
                         .onEnded({ value in
                             if draggOffset > 26 {
-                                withAnimation(.easeOut(duration: 0.35)){
+//                                withAnimation(.easeOut(duration: 0.35)){
                                     self.draggOffset = 0
                                     self.currentIndex += 1
-//                                    print(currentIndex)
-                                }
+                                    //                                    print(currentIndex)
+//                                }
                             } else if draggOffset < -20 {
-                                withAnimation(.easeOut(duration: 0.2)){
+//                                withAnimation(.easeOut(duration: 0.2)){
                                     self.draggOffset = 0
                                     self.currentIndex -= 1
-//                                    print(currentIndex)
-                                }
+                                    //                                    print(currentIndex)
+//                                }
                             }
                             else {
                                 withAnimation {
@@ -212,9 +279,11 @@ struct Home: View {
                         })
                 )
             Text(number != nil ? "quotes from friends" : "")
+                .customFont(15, .mono)
         }
-        .frame(height: arrayOfNumbers[currentIndex] == number ? 200 : 130)
-        .offset(y: -30)
+        .opacity(number == arrayOfNumbers[currentIndex] ? 1 : 0)
+        .frame(width: 200, height: arrayOfNumbers[currentIndex] == number ? 160 : 150)
+        
     }
     
 }
@@ -224,89 +293,3 @@ struct Home_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-
-
-
-
-//                Rectangle()
-//                    .fill(.gray)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  240,y: -130)
-//                    .rotationEffect(.degrees(3), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.cyan)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  180,y: -130)
-//                    .rotationEffect(.degrees(-3), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.red)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  150,y: -125)
-//                    .rotationEffect(.degrees(-9), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.yellow)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  130 ,y: -115)
-//                    .rotationEffect(.degrees(-15), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.blue)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x: 100 ,y: -100)
-//                    .rotationEffect(.degrees(-21), anchor: .topTrailing)
-//
-//                Rectangle()
-//                    .fill(.brown)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x: 60 ,y: -80)
-//                    .rotationEffect(.degrees(-27), anchor: .topTrailing)
-//
-//                Rectangle()
-//                    .fill(.indigo)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x: 0 ,y: -45)
-//                    .rotationEffect(.degrees(-33), anchor: .topTrailing)
-
-
-
-
-
-//MARK: - last the I used is down one
-
-//                Rectangle()
-//                    .fill(.gray)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  270, y: -165)
-//                    .rotationEffect(.degrees(3), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.cyan)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  250, y: -170)
-//                    .rotationEffect(.degrees(-3), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.red)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  220, y: -165)
-//                    .rotationEffect(.degrees(-9), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.yellow)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x:  180 , y: -150)
-//                    .rotationEffect(.degrees(-15), anchor: .topTrailing)
-//                Rectangle()
-//                    .fill(.blue)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x: 130 , y: -125)
-//                    .rotationEffect(.degrees(-21), anchor: .topTrailing)
-//
-//                Rectangle()
-//                    .fill(.brown)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x: 70 , y: -90)
-//                    .rotationEffect(.degrees(-27), anchor: .topTrailing)
-//
-//                Rectangle()
-//                    .fill(.indigo)
-//                    .frame(width: 500, height: 600)
-//                    .offset(x: 0 , y: -45)
-//                    .rotationEffect(.degrees(-33), anchor: .topTrailing)
