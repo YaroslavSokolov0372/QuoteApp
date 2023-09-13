@@ -15,6 +15,8 @@ struct Home: View {
     @State var draggOffset: CGFloat = 0
     @State var playAnimation: Bool = false
     
+    @State var openCollection: Bool = false
+    
     
     
     var intRandom = Int.random(in: 0...6)
@@ -103,6 +105,7 @@ struct Home: View {
         return solution
     }
     
+    
     var body: some View {
 
             ZStack {
@@ -116,6 +119,13 @@ struct Home: View {
                             .offset(x: offsetXRectangle(num: num, curerntIndex: currentIndex), y: offsetYRectangle(num: num, currentIndex: currentIndex))
                             .rotationEffect(.degrees(num < currentIndex ? -90 : rotationDegrees(num: num, currentIndex: currentIndex)), anchor: .topTrailing)
                             .animation(.easeIn(duration: 0.33), value: currentIndex)
+//                            .rotationEffect(.degrees(currentIndex == num ? openCollection ? 170 : 0 : 0), anchor: .topTrailing)
+//                            .frame(width: 600, height: 600)
+//                            .offset(x: -240,y: 550)
+//                            .rotationEffect(.degrees(170), anchor: .topTrailing)
+//                            .offset(x: 220, y: 230)
+                            
+                            
     
                 }
 
@@ -170,7 +180,7 @@ struct Home: View {
                         } label: {
                             Image("plusImage")
                                 .resizable()
-                                .frame(width: 100, height: 100)
+                                .frame(width: 80, height: 80)
                         }
                         .padding(.trailing)
                         Spacer()
@@ -278,6 +288,10 @@ struct Home: View {
                             }
                         })
                 )
+                .onTapGesture {
+                    print("hello world")
+                    openCollection = true
+                }
             Text(number != nil ? "quotes from friends" : "")
                 .customFont(15, .mono)
         }
