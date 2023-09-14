@@ -9,6 +9,9 @@ import SwiftUI
 
 struct Home: View {
     
+    @StateObject var homeVM = HomeVM()
+    
+    
     let arrayOfNumbers: [Int] = [07, 12, 32, 14, 42, 02, 01]
     
     @State var currentIndex: Int = 0
@@ -189,6 +192,13 @@ struct Home: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
+            }
+            .opacity(openCollection ? 0 : 1)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay {
+                if openCollection {
+                    Test(shouldCloseQuoteView: $openCollection)
+                }
             }
         }
     
