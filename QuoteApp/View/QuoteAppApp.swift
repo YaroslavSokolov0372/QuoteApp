@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+
 @main
 struct QuoteAppApp: App {
-    let persistenceController = PersistenceController.shared
+//    let persistenceController = PersistenceController.shared
+    
+//    let dataModel = PersistenceController()
     
 
     var body: some Scene {
@@ -17,6 +20,7 @@ struct QuoteAppApp: App {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             Home()
+                
         }
     }
 }

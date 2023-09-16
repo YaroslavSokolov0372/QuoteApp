@@ -11,6 +11,7 @@ import SwiftUI
 
 
 enum ImportFonts: String {
+    
     case mono = "ApproachMonoTRIAL-Md"
     case halenoir = "Halenoir-Black"
     case halenoirOutline = "Halenoir-BlackOutline"
