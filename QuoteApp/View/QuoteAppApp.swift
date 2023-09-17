@@ -19,7 +19,8 @@ struct QuoteAppApp: App {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            Home()
+//            Home()
+            CollectionView()
                 
         }
     }

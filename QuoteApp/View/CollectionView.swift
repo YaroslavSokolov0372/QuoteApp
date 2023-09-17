@@ -9,35 +9,24 @@ import SwiftUI
 
 struct CollectionView: View {
     
-    
+    @Environment(\.openURL) private var openURL
     @StateObject var collectionVM =  CollectionVM()
-    
-    let arrayOfNumbers: [Int] = [07, 12, 32, 14, 42, 02, 01]
 
-    var currentIndex = 0
-    
-    var sortedArrayOfNumbers2: [Int?] {
-        return [
-            arrayOfNumbers.nextElementAfter(currentIndex + 1) ?? nil,
-                arrayOfNumbers.nextElementAfter(currentIndex) ?? nil,
-                arrayOfNumbers[currentIndex],
-                arrayOfNumbers.elementBefore(currentIndex) ?? nil
-        ]
-    }
-    
-    @State var delayedOpacityRectangle: Bool = false
 
-    @State var playAnimation = false
     
+
+
     
     var gri = LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing)
     
-    
-    
+
     var body: some View {
         NavigationView {
             ZStack {
-                ForEach(sortedArrayOfNumbers2.indices.reversed(), id: \.self) { index in
+                
+                
+                //MARK: Rectangle
+                ForEach(0..<4, id: \.self) { index in
                     Rectangle()
                         .fill(gri)
                         .frame(width: 600, height: 600)
@@ -46,12 +35,199 @@ struct CollectionView: View {
                         .rotationEffect(.degrees(collectionVM.playAnimation ? 83 : 0), anchor: .center)
                         .offset(x: collectionVM.playAnimation ? 150 : 0,
                                 y: collectionVM.playAnimation ? -400 : 0)
-                        .rotationEffect(.degrees(Double(5 * index)), anchor: .center)
+                        .rotationEffect(.degrees(Double(6 * index)), anchor: .center)
                         .opacity(1 - 0.25 * Double(index))
-                        .opacity(index == 0 ? 1 : delayedOpacityRectangle ? 1 : 0)
+                        .opacity(index == 0 ? 1 : collectionVM.playDelayedOpacityAnimation ? 1 : 0)
+                }
+                
+                
+                VStack(spacing: 30) {
+                    
+                        VStack(alignment: .leading) {
+                            
+                            Text("''")
+                                .font(.system(size: 50))
+                                .foregroundColor(.white)
+                                .offset(y: 50)
+                            
+                            TextField("Quote..", text: $collectionVM.quotes[collectionVM.currentIndex].quote, axis: .vertical)
+                                .disabled(!collectionVM.settingsMode)
+                                .customFont(27, .mono)
+                                .frame(width: 300, height: 280, alignment: .topLeading)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(lineWidth: 1)
+                                        .opacity(collectionVM.settingsMode ? 1 : 0)
+                                )
+                                .offset(y: collectionVM.draggOffset)
+                                .overlay {
+                                    if !collectionVM.settingsMode {
+                                        Color.white.opacity(0.01)
+                                            .gesture(DragGesture(coordinateSpace: .global)
+                                                .onChanged({ value in
+                                                    withAnimation {
+                                                        collectionVM.draggOffset = value.translation.height
+                                                    }
+                                                    print("dragg")
+                                                    
+                                                })
+                                                    .onEnded({ value in
+                                                        withAnimation {
+                                                            collectionVM.draggOffset = 0
+                                                            collectionVM.currentIndex += 1
+                                                        }
+                                                    })
+                                            )
+                                        
+                                    }
+                                }
+                            
+                            TextField("Whom quote?", text: $collectionVM.whomQuote)
+                                .disabled(!collectionVM.settingsMode)
+                                .textInputAutocapitalization(.characters)
+                                .foregroundColor(.black.opacity(0.5))
+                                .customFont(14, .mono)
+                                .frame(width: 300)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(lineWidth: 1)
+                                        .opacity(collectionVM.settingsMode ? 1 : 0)
+                                )
+                        }
+                        .frame(width: 300)
+                        .offset(y: collectionVM.playQuoteAnimation ? 0 : -10)
+                        .opacity(collectionVM.playQuoteAnimation ? 1 : 0)
+                        
+            
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        Button {
+                            withAnimation {
+                                collectionVM.moreInfo.toggle()
+                            }
+                        } label: {
+                            HStack {
+                                Text("INFO")
+                                    .customFont(15, .mono)
+                                    .foregroundColor(.white)
+                                Image("arrowImage")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundColor(.white)
+                                    .frame(width: 17, height: 17)
+                                    .rotationEffect(.degrees(90))
+                            }
+                            .padding(4)
+                            .background(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(.black)
+                            )
+                            
+                        }
+                        .padding(.horizontal)
+                        .offset(y: collectionVM.moreInfo ? 0 : 150)
+                        
+                        Text("Date")
+                            .foregroundColor(.gray.opacity(0.4))
+                            .padding(.bottom, 1)
+                            .padding(.horizontal)
+                            .opacity(collectionVM.moreInfo ? 1 : 0)
+                            .animation(.easeInOut(duration: collectionVM.moreInfo ? 0.8 : 0.2), value: collectionVM.moreInfo)
+                        
+                        HStack(spacing: 30) {
+                            Text("03 MAR 2020")
+                            Text("12.52.03")
+                        }
+                        .customFont(13, .mono)
+                        .padding(.horizontal)
+                        .opacity(collectionVM.moreInfo ? 1 : 0)
+                        .animation(.easeInOut(duration: collectionVM.moreInfo ? 0.8 : 0.2), value: collectionVM.moreInfo)
+                        
+                        
+                        Text("Resource")
+                            .foregroundColor(.gray.opacity(0.4))
+                            .padding(.horizontal)
+                            .opacity(collectionVM.moreInfo ? 1 : 0)
+                            .animation(.easeInOut(duration: collectionVM.moreInfo ? 0.7 : 0.2), value: collectionVM.moreInfo)
+                        
+                        TextField("Link..", text: $collectionVM.link)
+                            .disabled(!collectionVM.settingsMode)
+                            .customFont(13, .mono)
+                            .underline()
+                            .frame(width: 300)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(lineWidth: 1)
+                                    .opacity(collectionVM.settingsMode ? 1 : 0)
+                            )
+                            .overlay {
+                                if !collectionVM.settingsMode {
+                                    Color.white.opacity(0.01)
+                                        .onTapGesture {
+                                            if let url = URL(string: collectionVM.link) {
+                                                openURL(url)
+                                                print("pressed")
+                                            }
+                                            
+                                        }
+                                }
+                            }
+                            .opacity(collectionVM.moreInfo ? 1 : 0)
+                            .animation(.easeInOut(duration: collectionVM.moreInfo ? 0.6 : 0.2), value: collectionVM.moreInfo)
+                            
+                            
+                        
+                        HStack(spacing: 50) {
+                            if collectionVM.wantToDelete {
+                                Button {
+                                    
+                                } label: {
+                                    Image("checkmarkImage")
+                                        .resizable()
+                                        .frame(width: 35, height: 35)
+                                }
+                            } else {
+                                ShareLink(item: collectionVM.quote) {
+                                    Image("shareImage")
+                                        .resizable()
+                                        .frame(width: 35, height: 35)
+                                        .offset(y: collectionVM.wantToDelete ? -5 : 0)
+                                }
+                            }
+                            Button {
+                                
+                                    collectionVM.wantToDelete.toggle()
+                                
+                                
+                            } label: {
+                                Image(collectionVM.wantToDelete ? "crossImage" : "trashImage")
+                                    .resizable()
+                                    .frame(width: collectionVM.wantToDelete ? 40 : 35, height: collectionVM.wantToDelete ? 45 : 35)
+                                    .offset(x: collectionVM.wantToDelete ? -1 : 0, y: collectionVM.wantToDelete ? 4 : 2)
+                            }
+                            .frame(width: 50)
+                                
+                            
+                            Text("\(collectionVM.currentIndex)/12")
+                                .customFont(18, .mono)
+                                .offset(x: 40)
+                                .frame(width: 100)
+                            
+                        }
+                        .padding()
+                        .frame(width: 300,  height: 50, alignment: .leading)
+                        
+                    }
+                    
                 }
             }
             .onAppear {
+//                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
+//                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
                     withAnimation(.spring(dampingFraction: 1.0, blendDuration: 0.0)){
                         collectionVM.playAnimation.toggle()
@@ -60,31 +236,45 @@ struct CollectionView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation(.spring(dampingFraction: 1.0, blendDuration: 0.0).speed(0.4)) {
                         collectionVM.playDelayedOpacityAnimation = true
-//                        playQuoteAnimation = true
+                        collectionVM.playQuoteAnimation = true
+                        
                     }
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-//                        shouldCloseQuoteView = false
-                        //                        withAnimation(.default.speed(1.2)){
-                        ////                            playAnimation.toggle()
-                        //                        }
+                        if collectionVM.settingsMode {
+                            withAnimation {
+                                collectionVM.quotes.append(QuoteExample(quote: " ", whomQuote: " "))
+                                collectionVM.currentIndex = collectionVM.quotes.count - 1
+                            }
+                            print(collectionVM.quotes.count)
+                        }
+////                        shouldCloseQuoteView = true
                     } label: {
-                        Image("arrowImage")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .rotationEffect(.degrees(180))
-                        
+                        if collectionVM.settingsMode {
+                            HStack {
+                                Image(systemName: "plus")
+                                    
+                                    .font(.system(size: 20))
+                                Text("new quote")
+                                    .customFont(15, .mono)
+                            }
+                            .foregroundColor(.black)
+                        } else {
+                            Image("arrowImage")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .rotationEffect(.degrees(180))
+                            
+                        }
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        withAnimation(.default.speed(1.2)){
-//                            settingsMode.toggle()
-////                                change = true
-//                            moreInfo = true
+                        withAnimation(.default.speed(1.4)){
+                            collectionVM.settingsMode.toggle()
                         }
                     } label: {
                         Image("moreImage")
