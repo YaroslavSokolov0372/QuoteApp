@@ -18,7 +18,7 @@ class CollectionVM: ObservableObject {
     
     @Published var playQuoteAnimation = false
     
-    @Published var moreInfo = true
+    @Published var moreInfo = false
     
     
     

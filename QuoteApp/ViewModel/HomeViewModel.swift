@@ -41,7 +41,7 @@ class HomeVM: ObservableObject {
 
     //MARK: - Temporary collection in type of Int
     
-    @Published var arrayOfNumbers: [Int] = [07, 12, 32, 14, 42, 02, 01]
+    @Published var arrayOfNumbers: [Int] = [07, 12, 32, 14, 42, 02, 01, 10]
     
     var sortedArrayOfNumbers: [Int?] {
         return [arrayOfNumbers.nextElementAfter(currentCollectionIndex + 1) ?? nil,

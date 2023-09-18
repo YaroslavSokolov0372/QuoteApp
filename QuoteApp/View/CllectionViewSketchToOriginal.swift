@@ -1,19 +1,18 @@
 //
-//  CollectionView.swift
+//  CllectionViewSketchToOriginal.swift
 //  QuoteApp
 //
-//  Created by Yaroslav Sokolov on 16/09/2023.
+//  Created by Yaroslav Sokolov on 18/09/2023.
 //
 
 import SwiftUI
 
-struct CollectionView: View {
+struct CllectionViewSketchToOriginal: View {
     
     @Environment(\.openURL) private var openURL
     @StateObject var collectionVM =  CollectionVM()
     var gri = LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing)
     
-
     var body: some View {
         NavigationView {
             ZStack {
@@ -24,7 +23,7 @@ struct CollectionView: View {
                     Rectangle()
                         .fill(gri)
                         .frame(width: 600, height: 600)
-                        .offset(x: 50 , y: -45)
+                        .offset(x: 55 , y: -85)
                         .rotationEffect(.degrees(-33), anchor: .topTrailing)
                         .rotationEffect(.degrees(collectionVM.playAnimation ? 83 : 0), anchor: .center)
                         .offset(x: collectionVM.playAnimation ? 150 : 0,
@@ -43,54 +42,65 @@ struct CollectionView: View {
                                 .font(.system(size: 50))
                                 .foregroundColor(.white)
                                 .offset(y: 50)
-                                .offset(y: collectionVM.draggOffset)
-                            
-
-                                    TextField("Quote..", text: $collectionVM.quote, axis: .vertical)
-                                        .disabled(!collectionVM.settingsMode)
-                                        .customFont(27, .mono)
-                                        .frame(width: 300, height: 280, alignment: .topLeading)
-                                        .padding()
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 5)
-                                                .stroke(lineWidth: 1)
-                                                .opacity(collectionVM.settingsMode ? 1 : 0)
-                                        )
-                                        .offset(y: collectionVM.draggOffset)
-                                        .overlay {
-                                            if !collectionVM.settingsMode {
-                                                Color.white.opacity(0.01)
-                                                    .gesture(DragGesture(coordinateSpace: .global)
-                                                        .onChanged({ value in
-                                                            withAnimation(){
+                                
+                            VStack(spacing: 0){
+                                ForEach(collectionVM.quotes.indices.reversed(), id: \.self) { index in
+                                        if !collectionVM.settingsMode {
+                                            Text(collectionVM.quotes[index].quote)
+                                                .customFont(27, .mono)
+                                                .frame(width: 300, height: 280, alignment: .topLeading)
+                                                .padding()
+                                                .offset(y: collectionVM.draggOffset)
+                                                .overlay {
+                                                    Color.white.opacity(0.01)
+                                                        .gesture(DragGesture().onChanged({ value in
+                                                            withAnimation {
                                                                 collectionVM.draggOffset = value.translation.height / 3
                                                             }
-                                                        })
-                                                             //MARK: Write funk to this
-                                                        .onEnded({ value in
-                                                            withAnimation() {
-                                                                if collectionVM.draggOffset > 40 {
-                                                                    collectionVM.draggOffset = 0
+                                                        }).onEnded({ _ in
+                                                            if collectionVM.draggOffset > 30 {
+                                                                withAnimation {
                                                                     collectionVM.currentIndex += 1
-                                                                    collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
-                                                                    collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
-                                                                } else  if collectionVM.draggOffset < -35{
                                                                     collectionVM.draggOffset = 0
+                                                                }
+                                                            } else if collectionVM.draggOffset < -30 {
+                                                                withAnimation {
                                                                     collectionVM.currentIndex -= 1
-                                                                    collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
-                                                                    collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
-                                                                } else {
+                                                                    collectionVM.draggOffset = 0
+                                                                }
+                                                            } else {
+                                                                withAnimation {
                                                                     collectionVM.draggOffset = 0
                                                                 }
                                                             }
-                                                        })
-                                                    )
+                                                        }))
+                                                }
+                                                .offset(y: CGFloat(collectionVM.currentIndex) * 280)
+                                                .animation(.default.speed(1.4), value: collectionVM.currentIndex)
+                                                .opacity(collectionVM.currentIndex == index ? 1 : 0)
+                                                .animation(.easeOut(duration: 0.1), value: collectionVM.currentIndex)
                                                 
-                                            }
+                                        } else {
+                                            TextField("text", text: $collectionVM.quote, axis: .vertical)
+                                                .customFont(27, .mono)
+                                                .frame(width: 300, height: 280, alignment: .topLeading)
+                                                .padding()
+                                                .offset(y: collectionVM.draggOffset)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 5)
+                                                        .stroke(lineWidth: 1)
+                                                        .opacity(collectionVM.settingsMode ? 1 : 0)
+                                                )
+                                                .offset(y: CGFloat(collectionVM.currentIndex) * 280)
+                                                .opacity(collectionVM.currentIndex == index ? 1 : 0)
                                         }
+                                }
+                                .frame(width: 300, height: 280, alignment: .topLeading)
+                                .offset(y: -280)
+                            }
+                            .frame(width: 300, height: 280)
+                            .padding(.bottom, 35)
                             
-                            
-                                
                             
                             TextField("Whom quote?", text: $collectionVM.whomQuote)
                                 .disabled(!collectionVM.settingsMode)
@@ -215,6 +225,8 @@ struct CollectionView: View {
                                 
                                     collectionVM.wantToDelete.toggle()
                                 
+                            //MARK: -delete later
+
                                 
                             } label: {
                                 Image(collectionVM.wantToDelete ? "crossImage" : "trashImage")
@@ -250,7 +262,7 @@ struct CollectionView: View {
                     withAnimation(.spring(dampingFraction: 1.0, blendDuration: 0.0).speed(0.4)) {
                         collectionVM.playDelayedOpacityAnimation = true
                         collectionVM.playQuoteAnimation = true
-                        
+
                     }
                 }
             }
@@ -292,6 +304,13 @@ struct CollectionView: View {
                     Button {
                         withAnimation(.default.speed(1.4)){
                             collectionVM.settingsMode.toggle()
+                            if collectionVM.settingsMode {
+                                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
+                                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
+                            } else {
+                                collectionVM.quotes[collectionVM.currentIndex].quote = collectionVM.quote
+                                collectionVM.quotes[collectionVM.currentIndex].whomQuote = collectionVM.whomQuote
+                            }
                         }
                     } label: {
                         Image("moreImage")
@@ -305,17 +324,13 @@ struct CollectionView: View {
     }
 }
 
-struct CollectionView_Previews: PreviewProvider {
+struct CllectionViewSketchToOriginal_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionView()
+        CllectionViewSketchToOriginal()
     }
 }
 
 
 
-//VStack {
-//    ForEach(collectionVM.quotes, id: \.self) { quote in
-//    }
-//    .frame(height: 280)
-//}
-//.frame(height: 280)
+
+
