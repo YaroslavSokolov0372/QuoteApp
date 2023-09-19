@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-let gradients1: [LinearGradient] = [LinearGradient(
+var gradients1: [LinearGradient] = [LinearGradient(
                                    stops: [
                                    Gradient.Stop(color: Color(red: 0.86, green: 0.82, blue: 0.76), location: 0.00),
                                    Gradient.Stop(color: Color(red: 0.73, green: 0.88, blue: 0.89), location: 1.00),
@@ -83,7 +83,7 @@ let gradients1: [LinearGradient] = [LinearGradient(
                                    ),
                                 ]
 
-let gradients: [LinearGradient] = [
+var gradients: [LinearGradient] = [
     LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing),
     LinearGradient(colors: [Color("Color9"), Color("Color10")], startPoint: .topLeading, endPoint: .bottomTrailing),
     LinearGradient(colors: [Color("Color11"), Color("Color12")], startPoint: .topLeading, endPoint: .bottomTrailing),
