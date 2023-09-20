@@ -11,13 +11,18 @@ struct HomeViewSketch: View {
     
     @State var arrayRectangles: [Rectangles] = []
     @State var currentRectangle = 1
-    @State var count = 1
+    @State var realIndex = 1 {
+        willSet {
+//            newValue > maxIndex ? maxIndex = newValue : nil
+        }
+    }
+    
     
     @State var maxIndex = 1
     @State var minIndex = 1
 
     
-    func isCurrentMaxIndex(_ currentIndex: Int, maxIndex : inout Int) -> Bool {
+    func isCurrentIndexMax(_ currentIndex: Int, maxIndex : inout Int) -> Bool {
         if currentIndex > maxIndex {
             maxIndex = currentIndex
             return true
@@ -89,23 +94,23 @@ struct HomeViewSketch: View {
     func shouldRemoveRectanglesBefore(_ rectangels: Int) -> Bool {
         var beforeCurrentRectangleCount = 0
         for index in arrayRectangles.indices {
-            if index < count {
+            if index < realIndex {
                 beforeCurrentRectangleCount += 1
             }
         }
 //        print("Elements before current index -", beforeCurrentRectangleCount)
-        return beforeCurrentRectangleCount >= gradients1.count
+        return beforeCurrentRectangleCount >= rectangels
     }
     
     func shouldRemoveRectanglesAfter(_ rectangels: Int) -> Bool {
         var afterCurrentRectangleCount = 0
         for index in arrayRectangles.indices {
-            if index > count {
+            if index > realIndex {
                 afterCurrentRectangleCount += 1
             }
         }
 //        print("Elements before current index -", afterCurrentRectangleCount)
-        return afterCurrentRectangleCount >= gradients1.count
+        return afterCurrentRectangleCount == rectangels
 
     }
     
@@ -134,31 +139,41 @@ struct HomeViewSketch: View {
             }
             VStack(spacing: 30){
                 Button {
+                    
                     withAnimation {
                         currentRectangle += 1
-                        count += 1
+                        realIndex += 1
                     }
                     
-//                    if isCurrentMaxIndex(count, maxIndex: &maxIndex) {
+//                    if isCurrentIndexMax(realIndex, maxIndex: &maxIndex) {
+//                        if var passedRectangle = arrayRectangles.elementBefore(currentRectangle) {
+//                            passedRectangle.id = .init()
+//                            arrayRectangles.append(passedRectangle)
+//                        }
+//                    }
+                    if isCurrentIndexMax(realIndex, maxIndex: &maxIndex) {
                         if var passedRectangle = arrayRectangles.elementBefore(currentRectangle) {
                             passedRectangle.id = .init()
                             arrayRectangles.append(passedRectangle)
                         }
-                        
-                        if shouldRemoveRectanglesBefore(8) {
-                            withAnimation {
-                                arrayRectangles.removeFirst(7)
-                                currentRectangle = 1
-                                maxIndex = 1
-                                count = 1
-                                minIndex = 1
-                            }
-                        }
-//                    }
-                    print("Count of rectangles ",arrayRectangles.count)
-                    print("current rectangle - \(currentRectangle)")
-                    print("RealIndex ",count)
+                    }
                     
+                        
+                        if shouldRemoveRectanglesBefore(9) {
+                            withAnimation {
+                                arrayRectangles.removeFirst(8)
+                                currentRectangle = 1
+                                realIndex = 1
+                                maxIndex = 1
+//                                count = 1
+//                                minIndex = 1
+//                            }
+                        }
+                    }
+                    print("MaxIndex - ",maxIndex)
+                    print("Count of rectangles ",arrayRectangles.count)
+                    print("RealIndex ",realIndex)
+                    print("current rectangle - \(currentRectangle)")
                 } label: {
                     Text("currentRectangle += 1")
                 }
@@ -167,46 +182,59 @@ struct HomeViewSketch: View {
                     
                     withAnimation {
                         
-                        //                        currentRectangle -= 1
-                        count -= 1
+                        currentRectangle -= 1
+                        realIndex -= 1
                     }
+                    print("MaxIndex - ",maxIndex)
+                    print("Count of rectangles ",arrayRectangles.count)
+                    print("RealIndex ",realIndex)
+                    print("current rectangle - \(currentRectangle)")
                     
-                    print("currentRectangle - \(currentRectangle)")
+//                    print("currentRectangle - \(currentRectangle)")
                     //                    print("count - \(count)")
                     //                    if isCurrentMinIndex(currentRectangle, minIndex: &minIndex) {
-                    
-                    
-                    
-                    if var lastRectangle = arrayRectangles.last {
                         
-                        lastRectangle.id = .init()
-                        if let lastGradient = gradients1.last {
-                            lastRectangle.color = lastGradient
-                            gradients1.removeLast()
-                            gradients1.insert(lastGradient, at: 0)
-                            
-                        }
-                        withAnimation {
-//                            if isCurrentMinIndex(count, minIndex: &minIndex) {
-                                arrayRectangles.removeLast()
-//                            }
-                            arrayRectangles.insert(lastRectangle, at: 0)
-                        }
-                    }
+                    //MARK: - First variant
+                    var beforeLast = arrayRectangles.elementBefore(arrayRectangles.count - 1)
+                    arrayRectangles.removeAll(where: { $0.id == beforeLast?.id })
+                    beforeLast?.id = .init()
+                    arrayRectangles.insert(beforeLast!, at: 0)
+                    //MARK: - SecondVariant
+//                    if var lastRectangle = arrayRectangles.last {
+//
+//                    }
+                    
+//                    if var lastRectangle = arrayRectangles.last {
+//
+//                        lastRectangle.id = .init()
+//                        if let lastGradient = gradients1.last {
+//                            lastRectangle.color = lastGradient
+//                            gradients1.removeLast()
+//                            gradients1.insert(lastGradient, at: 0)
+//
+//                        }
+//                        withAnimation {
+////                            if isCurrentMinIndex(count, minIndex: &minIndex) {
+//                                arrayRectangles.removeLast()
+////                            }
+//                            arrayRectangles.insert(lastRectangle, at: 0)
+//
+//                        }
+//                    }
                     //                    }
-                    print("Count of rectangles ",arrayRectangles.count)
-                    print("current rectangle - \(currentRectangle)")
-                    print("RealIndex ",count)
+//                    print("Count of rectangles ",arrayRectangles.count)
+//                    print("current rectangle - \(currentRectangle)")
+//                    print("RealIndex ",realIndex)
                     
                                         
-                                        if shouldRemoveRectanglesAfter(8) {
-//                                            arrayRectangles.removeLast(8)
-                                            currentRectangle = 1
-                                            count = 1
-                                            minIndex = 1
-                                            maxIndex = 1
-                                        }
-                                        print(arrayRectangles.count)
+//                                        if shouldRemoveRectanglesAfter(8) {
+////                                            arrayRectangles.removeLast(8)
+//                                            currentRectangle = 1
+//                                            realIndex = 1
+//                                            minIndex = 1
+//                                            maxIndex = 1
+//                                        }
+//                                        print(arrayRectangles.count)
                 } label: {
                     Text("currentRectangle -= 1")
                 }
@@ -217,6 +245,13 @@ struct HomeViewSketch: View {
         .onAppear {
             for gradient in gradients1 {
                 arrayRectangles.append(Rectangles(color: gradient, id: .init()))
+            }
+            
+            
+            if var firstRectangle = arrayRectangles.first {
+                firstRectangle.id = .init()
+                arrayRectangles.append(firstRectangle)
+
             }
 //            print(arrayRectangles.count)
 //            print(arrayRectangles.count)

@@ -21,6 +21,7 @@ struct QuoteAppApp: App {
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 //            Home()
             CollectionView()
+//            RemakeHomeView()
                 
         }
     }
