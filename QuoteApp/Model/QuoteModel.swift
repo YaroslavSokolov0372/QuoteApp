@@ -8,10 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct QuoteExample: Hashable {
+struct QuoteExample: Hashable, Identifiable {
+    
+    
+        
     
     var quote: String
     var whomQuote: String
     var id = UUID()
     
 }
+

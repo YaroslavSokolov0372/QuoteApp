@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RemakeHomeView: View {
     
-    @State var arrayRectangles: [Rectangles] = []
+    @State var arrayRectangles: [CustomRectangle] = []
     @State var currentRectangle = 1
     @State var realIndex = 1 {
         willSet {
@@ -21,7 +21,7 @@ struct RemakeHomeView: View {
     @State var maxIndex = 1
     @State var minIndex = 1
     
-    func whichColortNext(lastElement: Rectangles) -> LinearGradient {
+    func whichColortNext(lastElement: CustomRectangle) -> LinearGradient {
 
         var gradientFromLastElement = gradients1.firstIndex(where: { $0 == lastElement.color })
 
@@ -35,7 +35,7 @@ struct RemakeHomeView: View {
         
     }
     
-    func whichColortNext2(firstElement: Rectangles) -> LinearGradient {
+    func whichColortNext2(firstElement: CustomRectangle) -> LinearGradient {
 
         var gradientFromStartElement = gradients1.firstIndex(where: { $0 == firstElement.color })
 
@@ -181,14 +181,10 @@ struct RemakeHomeView: View {
                     
 //                    if isCurrentIndexMax(realIndex, maxIndex: &maxIndex) {
                         if var lastRectangle = arrayRectangles.last {
-//                            print(lastRectangle)
                             lastRectangle.id = .init()
                             lastRectangle.color = whichColortNext(lastElement: lastRectangle)
                             arrayRectangles.append(lastRectangle)
                         }
-//                    }
-                    
-                        
                         if shouldRemoveRectanglesBefore(9) {
                             withAnimation {
                                 arrayRectangles.removeFirst(8)
@@ -212,9 +208,8 @@ struct RemakeHomeView: View {
                     
                     withAnimation {
                         arrayRectangles.removeLast()
-                        arrayRectangles.insert(Rectangles(color: whichColortNext2(firstElement: arrayRectangles.first!), id: .init()), at: 0)
-                        //                        currentRectangle -= 1
-//                                                realIndex -= 1
+                        arrayRectangles.insert(CustomRectangle(color: whichColortNext2(firstElement: arrayRectangles.first!), id: .init()), at: 0)
+
                     }
                     print("MaxIndex - ",maxIndex)
                     print("Count of rectangles ",arrayRectangles.count)
@@ -273,9 +268,8 @@ struct RemakeHomeView: View {
         }
         .onAppear {
             for gradient in gradients1 {
-                arrayRectangles.append(Rectangles(color: gradient, id: .init()))
+                arrayRectangles.append(CustomRectangle(color: gradient, id: .init()))
             }
-            
             
             if var firstRectangle = arrayRectangles.first {
                 firstRectangle.id = .init()

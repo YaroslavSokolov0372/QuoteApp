@@ -10,10 +10,10 @@ import SwiftUI
 
 
 
-struct Rectangles: Identifiable, Equatable {
+struct CustomRectangle: Identifiable, Equatable {
     
     
-    static func == (lhs: Rectangles, rhs: Rectangles) -> Bool {
+    static func == (lhs: CustomRectangle, rhs: CustomRectangle) -> Bool {
         return lhs.id == rhs.id
     }
     

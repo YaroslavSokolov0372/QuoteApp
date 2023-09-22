@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D14FF9A72ABC43FB006D5161 /* LinearGradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14FF9A62ABC43FB006D5161 /* LinearGradientExtension.swift */; };
+		D14FF9A92ABC753B006D5161 /* CollectionModelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14FF9A82ABC753B006D5161 /* CollectionModelExample.swift */; };
 		D19C6C3D2AA08DB5004E4D58 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */; };
 		D1B837EC2AB88F96001BDC0A /* RemakeHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837EB2AB88F95001BDC0A /* RemakeHomeView.swift */; };
-		D1B837EE2AB9A6FA001BDC0A /* Rectangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837ED2AB9A6FA001BDC0A /* Rectangles.swift */; };
+		D1B837EE2AB9A6FA001BDC0A /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */; };
 		D1B837F02AB9A766001BDC0A /* HomeViewSketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837EF2AB9A766001BDC0A /* HomeViewSketch.swift */; };
 		D1C4BC362AACBEF7002F954D /* GradientColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC352AACBEF7002F954D /* GradientColors.swift */; };
 		D1C4BC482AACE27D002F954D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC472AACE27D002F954D /* Fonts.swift */; };
@@ -67,9 +69,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D14FF9A62ABC43FB006D5161 /* LinearGradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientExtension.swift; sourceTree = "<group>"; };
+		D14FF9A82ABC753B006D5161 /* CollectionModelExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModelExample.swift; sourceTree = "<group>"; };
 		D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		D1B837EB2AB88F95001BDC0A /* RemakeHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemakeHomeView.swift; sourceTree = "<group>"; };
-		D1B837ED2AB9A6FA001BDC0A /* Rectangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangles.swift; sourceTree = "<group>"; };
+		D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		D1B837EF2AB9A766001BDC0A /* HomeViewSketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewSketch.swift; sourceTree = "<group>"; };
 		D1C4BC352AACBEF7002F954D /* GradientColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColors.swift; sourceTree = "<group>"; };
 		D1C4BC472AACE27D002F954D /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			children = (
 				D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */,
 				D1C8B6B72AB4CB830017B24C /* ViewExtension.swift */,
+				D14FF9A62ABC43FB006D5161 /* LinearGradientExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -230,7 +235,8 @@
 				D1C4BC472AACE27D002F954D /* Fonts.swift */,
 				D1C8B6B32AB4983E0017B24C /* Persistence.swift */,
 				D1C8B6BF2AB760710017B24C /* QuoteModel.swift */,
-				D1B837ED2AB9A6FA001BDC0A /* Rectangles.swift */,
+				D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */,
+				D14FF9A82ABC753B006D5161 /* CollectionModelExample.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -389,6 +395,7 @@
 				D1C8B6BE2AB63C1D0017B24C /* CollectionViewModel.swift in Sources */,
 				D1C8B6B42AB4983E0017B24C /* Persistence.swift in Sources */,
 				D1C4BC592AACF03D002F954D /* Test.swift in Sources */,
+				D14FF9A92ABC753B006D5161 /* CollectionModelExample.swift in Sources */,
 				D1C8B6B22AB355FF0017B24C /* HomeViewModel.swift in Sources */,
 				D1C8B6BC2AB603B80017B24C /* CollectionView.swift in Sources */,
 				D1D7E8AE2A9F7E530087CFD3 /* QuoteApp.xcdatamodeld in Sources */,
@@ -396,10 +403,11 @@
 				D1D7E8D52A9F7EE50087CFD3 /* Home.swift in Sources */,
 				D19C6C3D2AA08DB5004E4D58 /* ArrayExtension.swift in Sources */,
 				D1D7E8A42A9F7E530087CFD3 /* ContentView.swift in Sources */,
+				D14FF9A72ABC43FB006D5161 /* LinearGradientExtension.swift in Sources */,
 				D1C8B6B82AB4CB830017B24C /* ViewExtension.swift in Sources */,
 				D1B837EC2AB88F96001BDC0A /* RemakeHomeView.swift in Sources */,
 				D1C8B6C22AB85D570017B24C /* CollectionViewSketch.swift in Sources */,
-				D1B837EE2AB9A6FA001BDC0A /* Rectangles.swift in Sources */,
+				D1B837EE2AB9A6FA001BDC0A /* CustomRectangle.swift in Sources */,
 				D1B837F02AB9A766001BDC0A /* HomeViewSketch.swift in Sources */,
 				D1C8B6C42AB86D870017B24C /* CllectionViewSketchToOriginal.swift in Sources */,
 				D1D7E8A22A9F7E530087CFD3 /* QuoteAppApp.swift in Sources */,

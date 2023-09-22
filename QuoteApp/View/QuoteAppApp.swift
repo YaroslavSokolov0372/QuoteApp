@@ -20,7 +20,8 @@ struct QuoteAppApp: App {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 //            Home()
-            CollectionView()
+//            RemakeHomeView()
+            HomeViewSketch()
 //            RemakeHomeView()
                 
         }
