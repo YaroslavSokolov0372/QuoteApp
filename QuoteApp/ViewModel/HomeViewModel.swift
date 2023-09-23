@@ -11,27 +11,18 @@ import CoreData
 
 class HomeVM: ObservableObject {
     
-    @Published var arrayRectangles: [CustomRectangle] = []
     
  
     
     //    private var presistenceController = PersistenceController()
     
     
-    //    var firstFourCollections: [QuoteCollection?] {
-    //        return [
-    //            presistenceController.fetchAllCollections().nextElementAfter(currentCollectionIndex + 1),
-    //            presistenceController.fetchAllCollections().nextElementAfter(currentCollectionIndex),
-    //            presistenceController.fetchAllCollections()[currentCollectionIndex],
-    //            presistenceController.fetchAllCollections().elementBefore(currentCollectionIndex),
-    //        ]
-    //    }
-    
-    @Published var currentCollectionIndex = 1
-    @Published var currentRectangle = 1
 
+    @Published var currentCollectionIndex = 1
     
+    @Published var currentRectangle = 1
     
+    @Published var arrayRectangles: [CustomRectangle] = []
     
     @Published var openCollection = false
     
@@ -41,7 +32,7 @@ class HomeVM: ObservableObject {
     
     @Published var draggOffset: CGFloat = 0
     
-    @Published var playAnimation = false
+//    @Published var playAnimation = false
     
     
     
@@ -63,55 +54,10 @@ class HomeVM: ObservableObject {
     init() {
         self.arrayOfNumbersFaked = arrayOfNumbers
         
-//        for gradient in gradients1 {
-//            arrayRectangles.append(CustomRectangle(color: gradient, id: .init()))
-//        }
     }
+
     
-    
-    func shouldRestartCollection<T>(currentCollectionIndex: inout Int, _ collection: [T]) where T: Equatable {
-        if currentCollectionIndex == collection.count - 1 {
-            
-            currentCollectionIndex = 1
-        } else {
-            
-            currentCollectionIndex += 1
-        }
-        
-    }
-    
-//    func appendPassedElement(collection: CollectionModel) {
-//        if var lastElement = arrayOfNumbers.firstIndex(where: { $0.id ==  collection.id }) {
-//            if lastElement == arrayOfNumbers.count - 1 {
-//                lastElement = 0
-//                arrayOfNumbers[lastElement].id = .init()
-//                arrayOfNumbersFaked.append(arrayOfNumbers[lastElement])
-//            } else {
-//                arrayOfNumbers[lastElement].id = .init()
-//                arrayOfNumbersFaked.append(arrayOfNumbers[lastElement + 1])
-//            }
-//        }
-//        
-//    }
-    
-    
-    //    func changeCurrentCollectionToNext<T>(_ collection: [T], currentCollectionIndex: inout Int) where T: Equatable {
-    ////        if let _ = collection.nextElementAfter(currentCollectionIndex) {
-    //            if currentCollectionIndex == collection.count - 5 {
-    //                currentCollectionIndex = 1
-    //                arrayOfNumbersFaked.removeFirst(arrayOfNumbers.count - 1)
-    //            } else {
-    //                currentCollectionIndex += 1
-    //            }
-    //        print("CurrentCollectionIndex -", currentCollectionIndex)
-    //        print("When should restart -", arrayOfNumbers.count)
-    //        print("In current collection - \(arrayOfNumbersFaked.count) collections")
-    //
-    ////        }
-    //    }
-    
-    
-    //MARK: Rewrited funcs
+    //MARK: Func for Infinity Carousel
     
     func appendNextCollectionAfter(_ lastItem: CollectionModel?) {
         
@@ -195,14 +141,7 @@ class HomeVM: ObservableObject {
         }
         return passedCount >= passed
     }
-    
 
-
-    
-    
-    
-    
-    
     var sortedArrayOfNumbers: [CollectionModel?] {
         return [arrayOfNumbersFaked.nextElementAfter(currentCollectionIndex + 1) ?? nil,
                 arrayOfNumbersFaked.nextElementAfter(currentCollectionIndex) ?? nil,
@@ -219,43 +158,6 @@ class HomeVM: ObservableObject {
         ]
     }
     
-    
-    
-
-    
-
-}
-
-
-
-
-
-
-
-
-class InfinityCarousel<T: Identifiable> {
-        
-    let arrayOfItems: [T]
-    
-    var fakedArray: [T]
-    
-    func checkNextElementToAppend<T>(_ item: T, collection: [T]) where T: Identifiable {
-        
-        if var itemIndex = collection.firstIndex(where: { $0.id == item.id }) {
-            if itemIndex == collection.count - 1 {
-                itemIndex = 0
-                var nextElement = collection[0]
-                
-                
-            }
-        }
-    }
-    
-    
-    init(arrayOfItems: [T], fakedArray: [T]) {
-        self.arrayOfItems = arrayOfItems
-        self.fakedArray = arrayOfItems
-    }
 }
 
 

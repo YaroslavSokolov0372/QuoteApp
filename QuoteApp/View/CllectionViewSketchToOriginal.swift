@@ -11,27 +11,32 @@ struct CllectionViewSketchToOriginal: View {
     
     @Environment(\.openURL) private var openURL
     @StateObject var collectionVM =  CollectionVM()
-    var gri = LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing)
+//    var gri = LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var gradient: LinearGradient
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ZStack {
                 
+                //MARK: - Top toolBar
+                topToolBar()
+                    .zIndex(1000)
                 
                 //MARK: Rectangle
-                ForEach(0..<4, id: \.self) { index in
-                    Rectangle()
-                        .fill(gri)
-                        .frame(width: 600, height: 600)
-                        .offset(x: 55 , y: -85)
-                        .rotationEffect(.degrees(-33), anchor: .topTrailing)
-                        .rotationEffect(.degrees(collectionVM.playAnimation ? 83 : 0), anchor: .center)
-                        .offset(x: collectionVM.playAnimation ? 150 : 0,
-                                y: collectionVM.playAnimation ? -400 : 0)
-                        .rotationEffect(.degrees(Double(6 * index)), anchor: .center)
-                        .opacity(1 - 0.25 * Double(index))
-                        .opacity(index == 0 ? 1 : collectionVM.playDelayedOpacityAnimation ? 1 : 0)
-                }
+//                ForEach(0..<4, id: \.self) { index in
+//                    Rectangle()
+//                        .fill(gradient)
+//                        .frame(width: 600, height: 600)
+//                        .offset(x: 55 , y: -85)
+//                        .rotationEffect(.degrees(-33), anchor: .topTrailing)
+//                        .rotationEffect(.degrees(collectionVM.playAnimation ? 83 : 0), anchor: .center)
+//                        .offset(x: collectionVM.playAnimation ? 150 : 0,
+//                                y: collectionVM.playAnimation ? -400 : 0)
+//                        .rotationEffect(.degrees(Double(6 * index)), anchor: .center)
+//                        .opacity(1 - 0.25 * Double(index))
+//                        .opacity(index == 0 ? 1 : collectionVM.playDelayedOpacityAnimation ? 1 : 0)
+//                }
+                rectangles()
                 
                 
                 VStack(spacing: 30) {
@@ -48,6 +53,7 @@ struct CllectionViewSketchToOriginal: View {
                                         if !collectionVM.settingsMode {
                                             Text(collectionVM.quotes[index].quote)
                                                 .customFont(27, .mono)
+                                                
                                                 .frame(width: 300, height: 280, alignment: .topLeading)
                                                 .padding()
                                                 .offset(y: collectionVM.draggOffset)
@@ -249,7 +255,14 @@ struct CllectionViewSketchToOriginal: View {
                     }
                     
                 }
+                
+                
+                
+                
             }
+            .background(
+                Color.white
+            )
             .onAppear {
                 collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
                 collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
@@ -265,68 +278,152 @@ struct CllectionViewSketchToOriginal: View {
 
                     }
                 }
+                
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        if collectionVM.settingsMode {
-                            withAnimation {
-                                collectionVM.quotes.append(QuoteExample(quote: "", whomQuote: ""))
-                                collectionVM.currentIndex = collectionVM.quotes.count - 1
-                                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
-                                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
-                            }
-                            print(collectionVM.quotes.count)
-                        } else {
-//                            shouldCloseQuoteView = true
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button {
+//                        if collectionVM.settingsMode {
+//                            withAnimation {
+//                                collectionVM.quotes.append(QuoteExample(quote: "", whomQuote: ""))
+//                                collectionVM.currentIndex = collectionVM.quotes.count - 1
+//                                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
+//                                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
+//                            }
+//                            print(collectionVM.quotes.count)
+//                        } else {
+////                            shouldCloseQuoteView = true
+//                        }
+//
+//                    } label: {
+//                        if collectionVM.settingsMode {
+//                            HStack {
+//                                Image(systemName: "plus")
+//
+//                                    .font(.system(size: 20))
+//                                Text("new quote")
+//                                    .customFont(15, .mono)
+//                            }
+//                            .foregroundColor(.black)
+//                        } else {
+//                            Image("arrowImage")
+//                                .resizable()
+//                                .frame(width: 24, height: 24)
+//                                .rotationEffect(.degrees(180))
+//
+//                        }
+//                    }
+//                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button {
+//                        withAnimation(.default.speed(1.4)){
+//                            collectionVM.settingsMode.toggle()
+//                            if collectionVM.settingsMode {
+//                                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
+//                                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
+//                            } else {
+//                                collectionVM.quotes[collectionVM.currentIndex].quote = collectionVM.quote
+//                                collectionVM.quotes[collectionVM.currentIndex].whomQuote = collectionVM.whomQuote
+//                            }
+//                        }
+//                    } label: {
+//                        Image("moreImage")
+//                            .resizable()
+//                            .frame(width: 30, height: 30)
+//                    }
+//
+//                }
+//            }
+//        }
+    }
+    
+    @ViewBuilder
+    private func topToolBar() -> some View {
+        GeometryReader { proxy in
+            HStack {
+                
+                Button {
+                    if collectionVM.settingsMode {
+                        withAnimation {
+                            collectionVM.quotes.append(QuoteExample(quote: "", whomQuote: ""))
+                            collectionVM.currentIndex = collectionVM.quotes.count - 1
+                            collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
+                            collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
                         }
-
-                    } label: {
-                        if collectionVM.settingsMode {
-                            HStack {
-                                Image(systemName: "plus")
-
-                                    .font(.system(size: 20))
-                                Text("new quote")
-                                    .customFont(15, .mono)
-                            }
-                            .foregroundColor(.black)
-                        } else {
-                            Image("arrowImage")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .rotationEffect(.degrees(180))
-
-                        }
+                        print(collectionVM.quotes.count)
+                    } else {
+                        //                            shouldCloseQuoteView = true
                     }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        withAnimation(.default.speed(1.4)){
-                            collectionVM.settingsMode.toggle()
-                            if collectionVM.settingsMode {
-                                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
-                                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
-                            } else {
-                                collectionVM.quotes[collectionVM.currentIndex].quote = collectionVM.quote
-                                collectionVM.quotes[collectionVM.currentIndex].whomQuote = collectionVM.whomQuote
-                            }
+                } label: {
+                    if collectionVM.settingsMode {
+                        HStack {
+                            Image(systemName: "plus")
+                            
+                                .font(.system(size: 20))
+                            Text("new quote")
+                                .customFont(15, .mono)
                         }
-                    } label: {
-                        Image("moreImage")
+                        .foregroundColor(.black)
+                    } else {
+                        Image("arrowImage")
                             .resizable()
-                            .frame(width: 30, height: 30)
+                            .frame(width: 24, height: 24)
+                            .rotationEffect(.degrees(180))
+                        
                     }
-
+                }
+                
+                Spacer()
+                
+                Button {
+                    withAnimation(.default.speed(1.4)){
+                        collectionVM.settingsMode.toggle()
+                        if collectionVM.settingsMode {
+                            collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
+                            collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
+                        } else {
+                            collectionVM.quotes[collectionVM.currentIndex].quote = collectionVM.quote
+                            collectionVM.quotes[collectionVM.currentIndex].whomQuote = collectionVM.whomQuote
+                        }
+                    }
+                } label: {
+                    Image("moreImage")
+                        .resizable()
+                        .frame(width: 30, height: 30)
                 }
             }
+            .padding(.horizontal, 20)
+            .frame(width: proxy.size.width, alignment: .center)
+            
+        }
+    }
+    
+    
+    private func rectangles() -> some View {
+        GeometryReader { proxy in
+            ZStack {
+                ForEach(0..<4, id: \.self) { index in
+                    Rectangle()
+                        .fill(gradient)
+                        .frame(width: 600, height: 600)
+                        .offset(x: 55 , y: -85)
+                        .rotationEffect(.degrees(-33), anchor: .topTrailing)
+                        .rotationEffect(.degrees(collectionVM.playAnimation ? 83 : 0), anchor: .center)
+                        .offset(x: collectionVM.playAnimation ? 150 : 0,
+                                y: collectionVM.playAnimation ? -400 : 0)
+                        .rotationEffect(.degrees(Double(6 * index)), anchor: .center)
+                        .opacity(1 - 0.25 * Double(index))
+                        .opacity(index == 0 ? 1 : collectionVM.playDelayedOpacityAnimation ? 1 : 0)
+                }
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height)
         }
     }
 }
 
 struct CllectionViewSketchToOriginal_Previews: PreviewProvider {
     static var previews: some View {
-        CllectionViewSketchToOriginal()
+        CllectionViewSketchToOriginal(gradient: LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
 }
 

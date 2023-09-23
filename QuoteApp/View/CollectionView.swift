@@ -15,7 +15,7 @@ struct CollectionView: View {
     
 
     var body: some View {
-//        NavigationView {
+        NavigationView {
             ZStack {
                 
                 
@@ -44,7 +44,7 @@ struct CollectionView: View {
                                 .foregroundColor(.white)
                                 .offset(y: 50)
                                 .offset(y: collectionVM.draggOffset)
-                            
+                                
 
                                     TextField("Quote..", text: $collectionVM.quote, axis: .vertical)
                                         .disabled(!collectionVM.settingsMode)
@@ -254,54 +254,54 @@ struct CollectionView: View {
                     }
                 }
             }
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button {
-//                        if collectionVM.settingsMode {
-//                            withAnimation {
-//                                collectionVM.quotes.append(QuoteExample(quote: "", whomQuote: ""))
-//                                collectionVM.currentIndex = collectionVM.quotes.count - 1
-//                                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
-//                                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
-//                            }
-//                            print(collectionVM.quotes.count)
-//                        } else {
-////                            shouldCloseQuoteView = true
-//                        }
-//
-//                    } label: {
-//                        if collectionVM.settingsMode {
-//                            HStack {
-//                                Image(systemName: "plus")
-//
-//                                    .font(.system(size: 20))
-//                                Text("new quote")
-//                                    .customFont(15, .mono)
-//                            }
-//                            .foregroundColor(.black)
-//                        } else {
-//                            Image("arrowImage")
-//                                .resizable()
-//                                .frame(width: 24, height: 24)
-//                                .rotationEffect(.degrees(180))
-//
-//                        }
-//                    }
-//                }
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Button {
-//                        withAnimation(.default.speed(1.4)){
-//                            collectionVM.settingsMode.toggle()
-//                        }
-//                    } label: {
-//                        Image("moreImage")
-//                            .resizable()
-//                            .frame(width: 30, height: 30)
-//                    }
-//
-//                }
-//            }
-//        }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        if collectionVM.settingsMode {
+                            withAnimation {
+                                collectionVM.quotes.append(QuoteExample(quote: "", whomQuote: ""))
+                                collectionVM.currentIndex = collectionVM.quotes.count - 1
+                                collectionVM.quote = collectionVM.quotes[collectionVM.currentIndex].quote
+                                collectionVM.whomQuote = collectionVM.quotes[collectionVM.currentIndex].whomQuote
+                            }
+                            print(collectionVM.quotes.count)
+                        } else {
+//                            shouldCloseQuoteView = true
+                        }
+
+                    } label: {
+                        if collectionVM.settingsMode {
+                            HStack {
+                                Image(systemName: "plus")
+
+                                    .font(.system(size: 20))
+                                Text("new quote")
+                                    .customFont(15, .mono)
+                            }
+                            .foregroundColor(.black)
+                        } else {
+                            Image("arrowImage")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .rotationEffect(.degrees(180))
+
+                        }
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        withAnimation(.default.speed(1.4)){
+                            collectionVM.settingsMode.toggle()
+                        }
+                    } label: {
+                        Image("moreImage")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+
+                }
+            }
+        }
     }
 }
 

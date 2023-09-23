@@ -22,7 +22,8 @@ extension View {
             .rotationEffect(.degrees(rotationDegrees(rectangelIndexInArray, currentRectangle: currentRectangle)), anchor: .topTrailing)
     }
 }
-func offsetXRectangle(_ rectangelIndexInArray: Int, currentRectangle: Int ) -> Double {
+
+private func offsetXRectangle(_ rectangelIndexInArray: Int, currentRectangle: Int ) -> Double {
     
     var solution: Double = 0
     var numberToMinus: Double = 0
@@ -46,7 +47,7 @@ func offsetXRectangle(_ rectangelIndexInArray: Int, currentRectangle: Int ) -> D
     }
 }
 
-func offsetYRectangle(_ rectangelIndexInArray: Int, currentRectangle: Int) -> Double {
+private func offsetYRectangle(_ rectangelIndexInArray: Int, currentRectangle: Int) -> Double {
     
     
     var solution: Double = 0
@@ -82,7 +83,7 @@ func offsetYRectangle(_ rectangelIndexInArray: Int, currentRectangle: Int) -> Do
     }
 }
 
-func rotationDegrees(_ rectangelIndexInArray: Int, currentRectangle: Int) -> Double {
+private func rotationDegrees(_ rectangelIndexInArray: Int, currentRectangle: Int) -> Double {
     var solution: Double = 0
     let defaultValue: Double = -33
     let indexMultiply: Double = Double(currentRectangle) * 6

@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct CollectionModel: Identifiable, Equatable, Hashable {
+    
     var num: Int
     var id = UUID()
     
