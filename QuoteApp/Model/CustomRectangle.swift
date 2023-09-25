@@ -10,10 +10,13 @@ import SwiftUI
 
 
 
-struct CustomRectangle: Identifiable, Equatable {
+struct CustomRectangle: Identifiable, Equatable, ChangeID {
     
+    var changeId = UUID()
     var color: LinearGradient
-    var id: UUID
+    var id: UUID {
+        changeId
+    }
     
     static func == (lhs: CustomRectangle, rhs: CustomRectangle) -> Bool {
         return lhs.id == rhs.id

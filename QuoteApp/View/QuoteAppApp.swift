@@ -6,22 +6,19 @@
 //
 
 import SwiftUI
-
+import SwiftData
 
 @main
 struct QuoteAppApp: App {
-//    let persistenceController = PersistenceController.shared
-    
-//    let dataModel = PersistenceController()
-    
 
     var body: some Scene {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//            Home()
+            Home()
+                .modelContainer(for: [Quote.self, CollectionsOfQuote.self])
 //            RemakeHomeView()
-            HomeViewSketch()
+//            HomeViewSketch()
 //            RemakeHomeView()
                 
         }

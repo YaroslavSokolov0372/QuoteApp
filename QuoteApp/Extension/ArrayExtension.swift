@@ -26,4 +26,12 @@ extension Array where Element: Equatable {
         }
     }
     
+    func elementByIndex(_ index: Index) -> Element? {
+        if self.indices.contains(index) {
+            return self[index]
+        } else {
+            return nil
+        }
+    }
+    
 }

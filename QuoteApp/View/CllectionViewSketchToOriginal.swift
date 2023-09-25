@@ -9,10 +9,11 @@ import SwiftUI
 
 struct CllectionViewSketchToOriginal: View {
     
+    @Environment(\.modelContext) var context
     @Environment(\.openURL) private var openURL
     @StateObject var collectionVM =  CollectionVM()
 //    var gri = LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing)
-    var gradient: LinearGradient
+    var gradient: CustomRectangle
     
     var body: some View {
 //        NavigationView {
@@ -404,7 +405,7 @@ struct CllectionViewSketchToOriginal: View {
             ZStack {
                 ForEach(0..<4, id: \.self) { index in
                     Rectangle()
-                        .fill(gradient)
+                        .fill(gradient.color)
                         .frame(width: 600, height: 600)
                         .offset(x: 55 , y: -85)
                         .rotationEffect(.degrees(-33), anchor: .topTrailing)
@@ -423,7 +424,7 @@ struct CllectionViewSketchToOriginal: View {
 
 struct CllectionViewSketchToOriginal_Previews: PreviewProvider {
     static var previews: some View {
-        CllectionViewSketchToOriginal(gradient: LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        CllectionViewSketchToOriginal(gradient: CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing)))
     }
 }
 
