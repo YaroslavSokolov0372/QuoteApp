@@ -16,7 +16,7 @@ struct QuoteAppApp: App {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             Home()
-                .modelContainer(for: [Quote.self, CollectionsOfQuote.self])
+                .modelContainer(for: [QuoteCollections.self, Quote.self])
 //            RemakeHomeView()
 //            HomeViewSketch()
 //            RemakeHomeView()

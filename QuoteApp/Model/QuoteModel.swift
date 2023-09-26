@@ -28,32 +28,41 @@ class Quote: Identifiable, ChangeID {
     }
     var quote: String
     var whomQuote: String
-    var date: Date
+    var datestamp: Date
     var resource: String
     
-    init(quote: String, whomQuote: String, date: Date, resource: String) {
+    init(quote: String, whomQuote: String, datestamp: Date, resource: String) {
         self.quote = quote
         self.whomQuote = whomQuote
-        self.date = date
+        self.datestamp = datestamp
         self.resource = resource
     }
 }
 
 
 @Model
-class CollectionsOfQuote: Identifiable, ChangeID {
+class QuoteCollections: Identifiable, ChangeID {
     
     var changeId = UUID()
     var id: UUID {
         return changeId
     }
-//    @Attribute(.unique)
     var name: String
     var quotes: [Quote]
+    var datestamp: Date
     
-    init(name: String, quotes: [Quote], id: UUID = .init()) {
+    var formattedDate: String {
+            let formater = DateFormatter()
+        formater.dateFormat = "MM-dd-yy HH:mn:ss"
+//        print(formater.string(from: datestamp))
+        return formater.string(from: datestamp)
+
+    }
+    
+    init(name: String, quotes: [Quote], id: UUID = .init(), datestamp: Date) {
         self.name = name
         self.quotes = quotes
+        self.datestamp = datestamp
     }
 }
 

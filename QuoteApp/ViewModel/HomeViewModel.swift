@@ -14,33 +14,33 @@ class HomeVM: ObservableObject {
     
     var modelContext: ModelContext? = nil
     
-    @Published var quoteCollections: [CollectionsOfQuote] = []
-    
-    @Published var fakedQuoteCollections: [CollectionsOfQuote] = []
-    
-    @Published var text = ""
-    
     @Published var currentCollectionIndex = 1
+    
+    @Published var quoteCollections: [QuoteCollections] = []
+    
+    @Published var fakedQuoteCollections: [QuoteCollections] = []
     
     @Published var currentRectangle = 1
     
     @Published var arrayRectangles: [CustomRectangle] = []
     
+    
+    @Published var text = ""
+    
     @Published var openCollection = false
     
     @Published var settingsMode = false
     
-    @Published var nameOffCurrentCollection = "quotes from friends"
-    
     @Published var draggOffset: CGFloat = 0
+    
+    
+    //MARK: SwiftData service
     
     func currentIndexExist() -> Bool {
         return fakedQuoteCollections.elementByIndex(currentCollectionIndex) != nil
     }
     
-    func collecitonIsEqualToCurrent(_ collection: CollectionsOfQuote?) -> Bool {
-        
-        
+    func collecitonIsEqualToCurrent(_ collection: QuoteCollections?) -> Bool {
         if currentIndexExist() {
             return fakedQuoteCollections[currentCollectionIndex] == collection
         } else {
@@ -48,43 +48,105 @@ class HomeVM: ObservableObject {
         }
     }
 
-    
-    //MARK: SwiftData service
-    
     func fetchCollections() {
-        let fetchDescriptor = FetchDescriptor<CollectionsOfQuote>()
+        let fetchDescriptor = FetchDescriptor<QuoteCollections>()
+        
+        
+//        quoteCollections = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
         
         if modelContext != nil {
             do {
                 quoteCollections = try modelContext!.fetch(fetchDescriptor)
-                
             } catch {
                 print("faile to fetch collections of Quote")
             }
         }
-//        print(quoteCollections.count)
-        
     }
+    
+    func setUpFakedCollections() {
+        
+            var sortedQuoteCollections: [QuoteCollections] {
+                return quoteCollections.sorted {
+                    $0.formattedDate < $1.formattedDate
+                }
+            }
+            
+            fakedQuoteCollections = sortedQuoteCollections
+        
+        
+//        if fakedQuoteCollections.count == 1 {
+//            
+////            for _ in 0...4 {
+////                if let element = fakedQuoteCollections.first {
+////                    element.changeId = .init()
+////                    fakedQuoteCollections.append(element)
+////                }
+////            }
+//            
+//            
+//        } else if fakedQuoteCollections.count == 2 {
+//            
+//        } else if fakedQuoteCollections.count == 3 {
+//            
+//        } else {
+//            
+//        }
+        
+//        if fakedQuoteCollections.count >= 4 {
+//            for collection in sortedQuoteCollections {
+//                collection.changeId = .init()
+//                fakedQuoteCollections.append(collection)
+//            }
+//        }
+        
+        }
     
     func updateData() {
         
         if currentIndexExist() {
-            quoteCollections[currentCollectionIndex].name = text
+            fakedQuoteCollections[currentCollectionIndex].name = self.text
             try? modelContext?.save()
+            
+            fetchCollections()
+            
+            setUpFakedCollections()
+            
+            print("current index exist, updateed data")
         }
     }
     
     func prepareForSettingsMode() {
         if currentIndexExist() {
-            text = fakedQuoteCollections[currentCollectionIndex].name
+            self.text = fakedQuoteCollections[currentCollectionIndex].name
+            print("current index exist, prepared data")
         }
     }
     
-    
     func deleteCollection() {
         
+        //        if let indexItem = quoteCollections.firstIndex(where: { $0.formattedDate == fakedQuoteCollections[currentCollectionIndex].formattedDate }) {
+        //
+        //            modelContext?.delete(quoteCollections[indexItem])
+        //            try? modelContext?.save()
+        //
+        //            fetchCollections()
+        //
+        //            setUpFakedCollections()
+        //
+        //            if fakedQuoteCollections.count < 1 {
+        //                currentCollectionIndex = 0
+        //            } else if currentCollectionIndex == fakedQuoteCollections.count {
+        //                currentCollectionIndex -= 1
+        //            }
+        //
+        //            text = ""
+        //            prepareForSettingsMode()
+        //
+        
+        //        }
+        
         if currentIndexExist() {
-            modelContext?.delete(quoteCollections[currentCollectionIndex])
+            modelContext?.delete(fakedQuoteCollections[currentCollectionIndex])
             
             try? modelContext?.save()
             
@@ -92,106 +154,52 @@ class HomeVM: ObservableObject {
             
             setUpFakedCollections()
             
-            prepareForSettingsMode()
-
-//            if fakedQuoteCollections.count - 1 == currentCollectionIndex {
-//                currentCollectionIndex -= 1
-//            } else 
-            if fakedQuoteCollections.count == 1 {
+            if fakedQuoteCollections.count < 1 {
                 currentCollectionIndex = 0
+            } else if currentCollectionIndex == fakedQuoteCollections.count {
+                currentCollectionIndex -= 1
             }
             
-//            currentCollectionIndex -= 1
+            text = ""
+            prepareForSettingsMode()
         }
         
-//        if currentIndexExist() {
-//            
-//            modelContext?.delete(quoteCollections[currentCollectionIndex])
-//            
-//            try? modelContext?.save()
-//            
-//            print(quoteCollections.count)
-//            
-//            fetchCollections()
-//            
-//            setUpFakedCollections()
-//            
-////            currentCollectionIndex -= 1
-//            currentRectangle -= 1
-//            
-////            if isCurrentIndexExist() {
-////                text = fakedQuoteCollections[currentCollectionIndex].name
-////            } else {
-////                text = ""
-////            }
-//        }
-//        print(currentCollectionIndex)
-        print(fakedQuoteCollections)
+        print(currentCollectionIndex)
+        
         
     }
     
     func createNewCollection() {
         
-//        text = ""
+        let newCollection = QuoteCollections(name: "", quotes: [], id: .init(), datestamp: .now)
         
-        let newCollection = CollectionsOfQuote(name: "", quotes: [], id: .init())
-        
-//                    if  fakedQuoteCollections.count == 1 {
-//                        currentRectangle = 1
-//                    }
-
         modelContext?.insert(newCollection)
+        try? modelContext?.save()
         
         fetchCollections()
         
         setUpFakedCollections()
         
         
+        if  fakedQuoteCollections.count == 2 {
+            currentCollectionIndex = 1
+        } else if fakedQuoteCollections.count > 2 {
+            currentCollectionIndex = fakedQuoteCollections.count - 1
+        }
         
         
-
-        
-//        if fakedQuoteCollections.count > 2 {
-//            currentCollectionIndex = quoteCollections.count - 1
-//        }
-        
+        text = ""
         settingsMode.toggle()
-        
 
-        
-        
-        //        text = ""
-        //        let newCollection = CollectionsOfQuote(name: text, quotes: [])
-        //        modelContext?.insert(newCollection)
-        //        try? modelContext?.save()
-        //
-        //
-        
-        //
-        //                setUpFakedCollections()
-        //
-        //        currentCollectionIndex = fakedQuoteCollections.count - 1
-        //
-        //        settingsMode = true
-        
-        
-//        print(currentCollectionIndex)
-        print(fakedQuoteCollections)
+        print("current index -", currentCollectionIndex)
+        print("count of collections -", fakedQuoteCollections.count)
 
         
     }
     
-    func setUpFakedCollections() {
-        fakedQuoteCollections = quoteCollections
-//        if quoteCollections.count > 4 {
-//            for collection in sortedArrayOfCollection.reversed() {
-//                if collection != nil {
-//                    collection?.changeId = UUID()
-//                    fakedQuoteCollections.append(collection!)
-//                }
-//            }
-//        }
-    }
+    
+
+    
     
     
     
@@ -201,34 +209,18 @@ class HomeVM: ObservableObject {
     
 
     
-//    @Published var playAnimation = false
     
     
     
-    //MARK: - Temporary collection in type of Int
+
     
-    //    @Published var arrayOfNumbers: [Int] = [07, 12, 32, 14, 42, 02, 01, 10]
-    @Published var arrayOfNumbers = [CollectionModel(num: 07),
-                                     CollectionModel(num: 12),
-                                     CollectionModel(num: 32),
-                                     CollectionModel(num: 14),
-                                     CollectionModel(num: 42),
-                                     CollectionModel(num: 02),
-                                     CollectionModel(num: 01),
-                                     CollectionModel(num: 10)
-    ]
-    
-    @Published var arrayOfNumbersFaked: [CollectionModel] = []
-    
-//    init() {
-////        self.arrayOfNumbersFaked = arrayOfNumbers
-//    }
+
     
     
     
     //MARK: Infinity carousel service
     
-    var sortedArrayOfCollection: [CollectionsOfQuote?] {
+    var firstFourCollections: [QuoteCollections?] {
         return [fakedQuoteCollections.nextElementAfter(currentCollectionIndex + 1) ?? nil,
                 fakedQuoteCollections.nextElementAfter(currentCollectionIndex) ?? nil,
                 fakedQuoteCollections.elementByIndex(currentCollectionIndex) ?? nil,
@@ -237,7 +229,7 @@ class HomeVM: ObservableObject {
         ]
     }
     
-    var sortedArrayOfCollectionFilled: [CollectionsOfQuote?] {
+    var firstThreeCollections: [QuoteCollections?] {
         return [
             fakedQuoteCollections.nextElementAfter(currentCollectionIndex) ?? nil,
             fakedQuoteCollections.elementByIndex(currentCollectionIndex) ?? nil,
@@ -280,6 +272,34 @@ class HomeVM: ObservableObject {
             }
         }
     }
+    
+    func shouldRemoveElements<T:ChangeID>(afterPassed: Int, collection: [T], currentIndex: Int) -> Bool {
+        var passedCount = 0
+        for index in collection.indices {
+            if index < currentIndex {
+                passedCount += 1
+            }
+        }
+        return passedCount >= afterPassed
+    }
+
+    
+    //MARK: Func for Infinity Carousel
+    
+    //MARK: - Temporary collection in type of Int
+    
+    @Published var arrayOfNumbers = [CollectionModel(num: 07),
+                                     CollectionModel(num: 12),
+                                     CollectionModel(num: 32),
+                                     CollectionModel(num: 14),
+                                     CollectionModel(num: 42),
+                                     CollectionModel(num: 02),
+                                     CollectionModel(num: 01),
+                                     CollectionModel(num: 10)
+    ]
+    
+    @Published var arrayOfNumbersFaked: [CollectionModel] = []
+    
     func appendNextCollectionAfter(_ lastItem: CollectionModel?) {
         
         if lastItem != nil {
@@ -298,21 +318,6 @@ class HomeVM: ObservableObject {
             }
         }
     }
-    
-    func shouldRemoveElements<T:ChangeID>(afterPassed: Int, collection: [T], currentIndex: Int) -> Bool {
-        var passedCount = 0
-        for index in collection.indices {
-            if index < currentIndex {
-                passedCount += 1
-            }
-        }
-        return passedCount >= afterPassed
-    }
-
-    
-    //MARK: Func for Infinity Carousel
-    
-
     
     func insertNextCollectionAfter(_ firstItem: CollectionModel?, realCollection: [CollectionModel]) {
         if firstItem != nil {

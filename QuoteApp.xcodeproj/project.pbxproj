@@ -73,7 +73,7 @@
 		D1C4BC4C2AACE9C1002F954D /* Halenoir-BlackOutline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Halenoir-BlackOutline.ttf"; sourceTree = "<group>"; };
 		D1C4BC4D2AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ApproachMonoTRIAL-Md.ttf"; sourceTree = "<group>"; };
 		D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Halenoir-Black.ttf"; sourceTree = "<group>"; };
-		D1C8B6B12AB355FF0017B24C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		D1C8B6B12AB355FF0017B24C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		D1C8B6B72AB4CB830017B24C /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		D1C8B6BB2AB603B80017B24C /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		D1C8B6BD2AB63C1D0017B24C /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
@@ -216,8 +216,8 @@
 		D1D7E8D22A9F7ED10087CFD3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D1C4BC352AACBEF7002F954D /* GradientColors.swift */,
 				D1C4BC472AACE27D002F954D /* Fonts.swift */,
+				D1C4BC352AACBEF7002F954D /* GradientColors.swift */,
 				D1C8B6BF2AB760710017B24C /* QuoteModel.swift */,
 				D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */,
 				D14FF9A82ABC753B006D5161 /* CollectionModelExample.swift */,

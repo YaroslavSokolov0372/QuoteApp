@@ -39,35 +39,27 @@ struct Home: View {
                 
                 
                 VStack {
-//                    ForEach(homeVM.sortedArrayOfCollection, id: \.self) { collection in
-//                        NumberViewOutlined(collection, currentIndex: homeVM.currentCollectionIndex)
-//                    }
-//                    .animation(.default.speed(1), value: homeVM.currentCollectionIndex)
-                    
-                    
-                    ForEach(homeVM.sortedArrayOfCollectionFilled, id: \.self) { collection in
+
+                    ForEach(homeVM.firstThreeCollections, id: \.?.changeId) { collection in
                         CollectionFilledView(collection, currentIndex: homeVM.currentCollectionIndex)
                     }
+                    // ?
+                    .animation(.default.speed(1), value: homeVM.currentCollectionIndex)
+                    //
                 }
                 .offset(x: -30, y: 125)
                 .zIndex(1000)
                 
                 VStack {
-                    ForEach(homeVM.sortedArrayOfCollection, id: \.self) { collection in
+                    ForEach(homeVM.firstFourCollections, id: \.?.changeId) { collection in
                         CollectionOutLinedView(collection, currentIndex: homeVM.currentCollectionIndex)
                     }
+                    // ?
+                    .animation(.default.speed(1), value: homeVM.currentCollectionIndex)
+                    //
                 }
                 .offset(x: -30, y: 50)
                 .zIndex(1000)
-                
-//                VStack {
-//                    ForEach(homeVM.sortedArrayOfCollectionFilled, id: \.self) { collection in
-//                        NumberViewFilled(collection, currentIndex: homeVM.currentCollectionIndex)
-//                    }
-//                    .animation(.default.speed(1), value: homeVM.currentCollectionIndex)
-//                }
-//                .offset(x: -30, y: 150)
-//                .zIndex(1000)
             }
             
             .frame(width: proxy.size.width, height: proxy.size.height)
@@ -79,21 +71,10 @@ struct Home: View {
                 homeVM.modelContext = context
                 homeVM.fetchCollections()
                 homeVM.setUpFakedCollections()
-//                if homeVM.quoteCollections.count < 1 {
-//                    homeVM.currentCollectionIndex = 0
-//                }
-                
-//                homeVM.fakedQuoteCollections = homeVM.quoteCollections
-//                
-//                if homeVM.quoteCollections.count > 4 {
-//                    for collection in homeVM.sortedArrayOfCollection.reversed() {
-//                        if collection != nil {
-//                            //                        collection?.changeId = .init()
-//                            homeVM.fakedQuoteCollections.append(collection!)
-//                        }
-//                    }
-//                }
-                
+                if homeVM.quoteCollections.count < 2 {
+                    homeVM.currentCollectionIndex = 0
+                }
+
                 for gradient in gradients1 {
                     homeVM.arrayRectangles.append(gradient)
                 }
@@ -124,14 +105,9 @@ struct Home: View {
                             homeVM.settingsMode.toggle()
                             if homeVM.settingsMode {
                                 homeVM.prepareForSettingsMode()
-//                                if homeVM.isCurrentIndexExist() {
-//                                    homeVM.text = homeVM.quoteCollections[homeVM.currentCollectionIndex].name
-//                                }
+
                             } else {
                                 homeVM.updateData()
-//                                homeVM.updateData()
-//                                homeVM.text = homeVM.quoteCollections[homeVM.currentCollectionIndex].name
-//                                homeVM.text = ""
                             }
                         }
                     } label: {
@@ -146,20 +122,8 @@ struct Home: View {
                         withAnimation() {
                             if homeVM.settingsMode {
                                 homeVM.deleteCollection()
-//                                homeVM.currentCollectionIndex -= 1
-//                                homeVM.text = homeVM.quoteCollections[homeVM.currentCollectionIndex].name
-//                                homeVM.setUpFakedCollections()
-//                                homeVM.deleteCollection()
                             } else {
                                 homeVM.createNewCollection()
-//                                homeVM.createNewCollection()
-//                                homeVM.setUpFakedCollections()
-//                                homeVM.currentCollectionIndex = homeVM.fakedQuoteCollections.count - 1
-//                                homeVM.settingsMode = true
-                                
-                                //                                homeVM.settingsMode = true
-                                
-//                                print(homeVM.quoteCollections.count)
                             }
                         }
                         
@@ -189,7 +153,8 @@ struct Home: View {
         }
     }
     
-    @ViewBuilder private func CollectionOutLinedView(_ collection: CollectionsOfQuote?, currentIndex: Int) -> some View {
+    @ViewBuilder
+    private func CollectionOutLinedView(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
         VStack(alignment: .leading) {
             Text(collection != nil ? String(collection!.quotes.count) : "")
                 .customFont(homeVM.collecitonIsEqualToCurrent(collection) ? 110 : 80, .halenoirOutline)
@@ -207,7 +172,7 @@ struct Home: View {
     }
     
     @ViewBuilder
-    private func CollectionFilledView(_ collection: CollectionsOfQuote?, currentIndex: Int) -> some View {
+    private func CollectionFilledView(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
         VStack(alignment: .leading) {
             Text(collection != nil ? String(collection!.quotes.count) : "")
                 .customFont(homeVM.collecitonIsEqualToCurrent(collection) ? 110 : 80, .halenoir)
@@ -223,22 +188,30 @@ struct Home: View {
                         .onEnded({ value in
                             if homeVM.draggOffset > 25 {
                                 
+//                                homeVM.predictNextItemAppend(lastItem: homeVM.fakedQuoteCollections.last,
+//                                                             realCollection: homeVM.quoteCollections,
+//                                                             &homeVM.fakedQuoteCollections)
+                                
+                                
                                 withAnimation {
-                                    homeVM.currentCollectionIndex += 1
-                                    homeVM.currentRectangle += 1
+                                    if homeVM.fakedQuoteCollections.nextElementAfter(homeVM.currentCollectionIndex) != nil {
+                                        homeVM.currentCollectionIndex += 1
+                                        homeVM.currentRectangle += 1
+                                    }
                                     homeVM.draggOffset = 0
                                 }
                                 
-//                                if homeVM.quoteCollections.count > 4 {
-//                                    homeVM.predictNextItemAppend(lastItem: homeVM.fakedQuoteCollections.last,
-//                                                                 realCollection: homeVM.quoteCollections,
-//                                                                 &homeVM.fakedQuoteCollections)
-//                                }
-//                                
-//                                homeVM.predictNextItemAppend(lastItem: homeVM.arrayRectangles.last, realCollection: gradients1, &homeVM.arrayRectangles)
                                 
-//                                homeVM.appendNextCollectionAfter(homeVM.arrayOfNumbersFaked.last)
-//                                homeVM.appentNextGradientAfter(homeVM.arrayRectangles.last!, realCollection: gradients1)
+                                //                                if homeVM.quoteCollections.count > 4 {
+                                //                                    homeVM.predictNextItemAppend(lastItem: homeVM.fakedQuoteCollections.last,
+                                //                                                                 realCollection: homeVM.quoteCollections,
+                                //                                                                 &homeVM.fakedQuoteCollections)
+                                //                                }
+                                //                                
+                                //                                homeVM.predictNextItemAppend(lastItem: homeVM.arrayRectangles.last, realCollection: gradients1, &homeVM.arrayRectangles)
+                                
+                                //                                homeVM.appendNextCollectionAfter(homeVM.arrayOfNumbersFaked.last)
+                                //                                homeVM.appentNextGradientAfter(homeVM.arrayRectangles.last!, realCollection: gradients1)
                                 
                                 
                                 if homeVM.shouldRemoveRectangles(passed: 9) {
@@ -254,8 +227,8 @@ struct Home: View {
                                     }
                                 }
                                 
-//                                print(homeVM.currentRectangle)
-                            } 
+                                //                                print(homeVM.currentRectangle)
+                            }
 //                            else if homeVM.draggOffset < -20 {
 //                                
 //                                withAnimation {
@@ -313,7 +286,7 @@ struct Home: View {
     
     
     @ViewBuilder
-    private func NumberViewOutlined(_ collection: CollectionsOfQuote?, currentIndex: Int) -> some View {
+    private func NumberViewOutlined(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
         VStack(alignment: .leading) {
             Text(collection != nil ? String(collection!.quotes.count) : "0")
 //                .customFont(homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? 90 : 70, .halenoirOutline)
@@ -326,7 +299,7 @@ struct Home: View {
         .frame(width: 200 ,height: homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? 160 : 150)
     }
     
-    private func NumberViewFilled(_ collection: CollectionsOfQuote?, currentIndex: Int) -> some View {
+    private func NumberViewFilled(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
         VStack(alignment: .leading) {
             Spacer()
 
@@ -393,7 +366,7 @@ struct Home: View {
                     homeVM.openCollection = true
                 }
                 .offset(y: 50)
-            TextField("name of collection", text: $homeVM.nameOffCurrentCollection)
+            TextField("name of collection", text: $homeVM.text)
                 .customFont(15, .mono)
                 .disabled(!homeVM.settingsMode)
                 .padding(8)
