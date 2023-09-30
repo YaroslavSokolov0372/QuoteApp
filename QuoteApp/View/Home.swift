@@ -6,46 +6,55 @@
 //
 
 import SwiftUI
+import SwiftData
+
 
 
 struct Home: View {
 
     @Environment(\.modelContext) var context
     @StateObject var homeVM = HomeVM()
-    
-    
 
     var body: some View {
         
         GeometryReader { proxy in
             ZStack {
                 
-                ForEach(homeVM.arrayRectangles.reversed()) { rectangle in
+                //MARK: Rectangles
+                ForEach(homeVM.arrayRectanglesFaked.reversed()) { rectangle in
                     
-                    let rectangleIndex = homeVM.arrayRectangles.firstIndex(where: { $0.id == rectangle.id })
+                    let rectangleIndex = homeVM.arrayRectanglesFaked.firstIndex(where: { $0.id == rectangle.id })
                     
                     Rectangle()
                         .fill(rectangle.color)
-                        .frame(width: 500, height: 600)
+                        .frame(width: homeVM.playBridgeAnimation ? 500 : rectangleIndex == homeVM.currentRectangle ? 600 : 500,
+                               height: 600)
                         .offsetRectangle(rectangelIndexInArray: rectangleIndex!, currentRectangle: homeVM.currentRectangle)
                         .rotationEffectRectangle(rectangelIndexInArray: rectangleIndex!, currentRectangle: homeVM.currentRectangle)
-                        .zIndex(Double(homeVM.arrayRectangles.count - rectangleIndex!))
+
+                        .rotationEffect(.degrees(homeVM.playBridgeAnimation ? 0 : rectangleIndex == homeVM.currentRectangle ? 83 : 0), anchor: .center)
+                        .offset(x: homeVM.playBridgeAnimation ? 0 : rectangleIndex == homeVM.currentRectangle ? 216 : 0,
+                                y: homeVM.playBridgeAnimation ? 0 : rectangleIndex == homeVM.currentRectangle ? -383 : 0 )
+                        .zIndex(Double(homeVM.arrayRectanglesFaked.count - rectangleIndex!))
+                    
+                    
                 }
                 
                 
+                //MARK: Title and tools
                 TitleAndTools()
                     .frame(width: proxy.size.width)
                 .zIndex(1000)
                 
-                
+                //MARK: Collections
                 VStack {
 
                     ForEach(homeVM.firstThreeCollections, id: \.?.changeId) { collection in
                         CollectionFilledView(collection, currentIndex: homeVM.currentCollectionIndex)
                     }
-                    // ?
+                    
                     .animation(.default.speed(1), value: homeVM.currentCollectionIndex)
-                    //
+                    
                 }
                 .offset(x: -30, y: 125)
                 .zIndex(1000)
@@ -54,17 +63,17 @@ struct Home: View {
                     ForEach(homeVM.firstFourCollections, id: \.?.changeId) { collection in
                         CollectionOutLinedView(collection, currentIndex: homeVM.currentCollectionIndex)
                     }
-                    // ?
+                    
                     .animation(.default.speed(1), value: homeVM.currentCollectionIndex)
-                    //
+                    
                 }
                 .offset(x: -30, y: 50)
                 .zIndex(1000)
             }
-            
             .frame(width: proxy.size.width, height: proxy.size.height)
             .overlay(content: {
-                homeVM.openCollection ? CllectionViewSketchToOriginal(gradient: gradients1[homeVM.currentRectangle]) : nil
+                homeVM.openCollection ? CllectionView(collectionVM: CollectionVM(currentCollection: homeVM.quoteCollections[homeVM.currentCollectionIndex], modelContext: context),  collectionIsOpen: $homeVM.openCollection, playBridgeAnimation: $homeVM.playBridgeAnimation, rectangle: homeVM.arrayRectanglesFaked[homeVM.currentRectangle]) : nil
+                
             })
             
             .onAppear {
@@ -74,12 +83,9 @@ struct Home: View {
                 if homeVM.quoteCollections.count < 2 {
                     homeVM.currentCollectionIndex = 0
                 }
-
-                for gradient in gradients1 {
-                    homeVM.arrayRectangles.append(gradient)
+                for rectangle in customRectanglesArray {
+                    homeVM.arrayRectanglesFaked.append(rectangle)
                 }
-                print(homeVM.currentCollectionIndex)
-                
             }
         }
     }
@@ -102,6 +108,7 @@ struct Home: View {
                 VStack(alignment: .trailing) {
                     Button {
                         withAnimation {
+                            
                             homeVM.settingsMode.toggle()
                             if homeVM.settingsMode {
                                 homeVM.prepareForSettingsMode()
@@ -154,7 +161,7 @@ struct Home: View {
     }
     
     @ViewBuilder
-    private func CollectionOutLinedView(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
+    private func CollectionOutLinedView(_ collection: QuoteCollection?, currentIndex: Int) -> some View {
         VStack(alignment: .leading) {
             Text(collection != nil ? String(collection!.quotes.count) : "")
                 .customFont(homeVM.collecitonIsEqualToCurrent(collection) ? 110 : 80, .halenoirOutline)
@@ -172,7 +179,7 @@ struct Home: View {
     }
     
     @ViewBuilder
-    private func CollectionFilledView(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
+    private func CollectionFilledView(_ collection: QuoteCollection?, currentIndex: Int) -> some View {
         VStack(alignment: .leading) {
             Text(collection != nil ? String(collection!.quotes.count) : "")
                 .customFont(homeVM.collecitonIsEqualToCurrent(collection) ? 110 : 80, .halenoir)
@@ -188,60 +195,38 @@ struct Home: View {
                         .onEnded({ value in
                             if homeVM.draggOffset > 25 {
                                 
-//                                homeVM.predictNextItemAppend(lastItem: homeVM.fakedQuoteCollections.last,
-//                                                             realCollection: homeVM.quoteCollections,
-//                                                             &homeVM.fakedQuoteCollections)
-                                
-                                
                                 withAnimation {
                                     if homeVM.fakedQuoteCollections.nextElementAfter(homeVM.currentCollectionIndex) != nil {
                                         homeVM.currentCollectionIndex += 1
                                         homeVM.currentRectangle += 1
+                                        homeVM.appentNextRectangleAfter(homeVM.arrayRectanglesFaked.last!, realCollection: customRectanglesArray)
                                     }
                                     homeVM.draggOffset = 0
                                 }
                                 
-                                
-                                //                                if homeVM.quoteCollections.count > 4 {
-                                //                                    homeVM.predictNextItemAppend(lastItem: homeVM.fakedQuoteCollections.last,
-                                //                                                                 realCollection: homeVM.quoteCollections,
-                                //                                                                 &homeVM.fakedQuoteCollections)
-                                //                                }
-                                //                                
-                                //                                homeVM.predictNextItemAppend(lastItem: homeVM.arrayRectangles.last, realCollection: gradients1, &homeVM.arrayRectangles)
-                                
-                                //                                homeVM.appendNextCollectionAfter(homeVM.arrayOfNumbersFaked.last)
-                                //                                homeVM.appentNextGradientAfter(homeVM.arrayRectangles.last!, realCollection: gradients1)
-                                
-                                
                                 if homeVM.shouldRemoveRectangles(passed: 9) {
                                     withAnimation {
-                                        homeVM.arrayRectangles.removeFirst(8)
+                                        homeVM.arrayRectanglesFaked.removeFirst(8)
                                         homeVM.currentRectangle = 1
                                     }
                                 }
-                                if homeVM.shouldRemoveCollections(passed: homeVM.arrayOfNumbers.count + 1) {
-                                    withAnimation {
-                                        homeVM.arrayOfNumbersFaked.removeFirst(8)
-                                        homeVM.currentCollectionIndex = 1
+                                
+                                
+                                print(homeVM.arrayRectanglesFaked.count)
+
+                            }
+                            else if homeVM.draggOffset < -20 {
+                                withAnimation {
+                                    if homeVM.fakedQuoteCollections.elementBefore(homeVM.currentCollectionIndex) != nil {
+                                        homeVM.currentCollectionIndex -= 1
+                                        homeVM.arrayRectanglesFaked.removeLast()
+                                        homeVM.insertNextRectangleAfter(homeVM.arrayRectanglesFaked.first!, realCollection: customRectanglesArray)
                                     }
+                                    homeVM.draggOffset = 0
                                 }
                                 
-                                //                                print(homeVM.currentRectangle)
+                                print(homeVM.arrayRectanglesFaked.count)
                             }
-//                            else if homeVM.draggOffset < -20 {
-//                                
-//                                withAnimation {
-//                                    homeVM.arrayRectangles.removeLast()
-////                                    homeVM.insertNextGradientAfter(homeVM.arrayRectangles.last!,
-////                                                                   realCollection: gradients1)
-//                                    homeVM.draggOffset = 0
-//                                    homeVM.arrayOfNumbersFaked.removeLast()
-//                                    homeVM.insertNextCollectionAfter(homeVM.arrayOfNumbersFaked.first,
-//                                                                     realCollection: homeVM.arrayOfNumbers)
-//                                    print(homeVM.arrayOfNumbersFaked.count)
-//                                }
-//                            }
                             else {
                                 withAnimation {
                                     homeVM.draggOffset = 0
@@ -249,18 +234,14 @@ struct Home: View {
                             }
                         })
                 )
-                .onTapGesture {
-                    print("hello world")
-                    homeVM.openCollection = true
-                }
+
             if homeVM.settingsMode {
-                TextField("Name of collection", text:  $homeVM.text)
+                TextField("Name of collection", text:  $homeVM.text.max(19))
                     .customFont(17, .mono)
                     .padding()
+                    
                     .frame(width: 240, height: 40, alignment: .leading)
-                
                     .background(
-                        
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(lineWidth: 1)
                         
@@ -270,134 +251,25 @@ struct Home: View {
                     .customFont(17, .mono)
                     .padding()
                     .frame(width: 240, height: 40, alignment: .leading)
+
                 
+            }
+        }
+        .onTapGesture {
+            if !homeVM.settingsMode {
+                homeVM.openCollection = true
+                homeVM.playBridgeAnimation = false
             }
         }
         .opacity(homeVM.collecitonIsEqualToCurrent(collection) ? 1 : 0)
         .frame(width: 240, height: 150)
-//        .opacity(homeVM.fakedQuoteCollections.isEmpty ? 0 : 1)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    @ViewBuilder
-    private func NumberViewOutlined(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
-        VStack(alignment: .leading) {
-            Text(collection != nil ? String(collection!.quotes.count) : "0")
-//                .customFont(homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? 90 : 70, .halenoirOutline)
-                .customFont(homeVM.collecitonIsEqualToCurrent(collection) ? 90 : 70, .halenoirOutline)
-            Text(collection != nil ? collection!.name : "Quotes for friends")
-                .customFont(15, .mono)
-        }
-//        .opacity(homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? 0 : 1)
-        .opacity(homeVM.collecitonIsEqualToCurrent(collection) ? 0 : 1)
-        .frame(width: 200 ,height: homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? 160 : 150)
-    }
-    
-    private func NumberViewFilled(_ collection: QuoteCollections?, currentIndex: Int) -> some View {
-        VStack(alignment: .leading) {
-            Spacer()
-
-            Text(collection != nil ? String(collection!.quotes.count) : "0")
-//                .customFont(homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? 90 : 70, .halenoir)
-//                .offset(y: homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? homeVM.draggOffset : 0)
-                .customFont(homeVM.collecitonIsEqualToCurrent(collection) ? 90 : 70, .halenoir)
-                .offset(y: homeVM.collecitonIsEqualToCurrent(collection) ? homeVM.draggOffset : 0)
-
-                .gesture(
-                    DragGesture(minimumDistance: 0.6)
-                        .onChanged({ value in
-                            homeVM.draggOffset = value.translation.height / 3.5
-
-                        })
-                        .onEnded({ value in
-                            if homeVM.draggOffset > 25 {
-                                
-                                withAnimation {
-                                    homeVM.currentCollectionIndex += 1
-                                    homeVM.currentRectangle += 1
-                                    homeVM.draggOffset = 0
-                                }
-                                
-                                homeVM.appendNextCollectionAfter(homeVM.arrayOfNumbersFaked.last)
-//                                homeVM.appentNextGradientAfter(homeVM.arrayRectangles.last!, realCollection: gradients1)
-                                
-                                
-                                if homeVM.shouldRemoveRectangles(passed: 9) {
-                                    withAnimation {
-                                        homeVM.arrayRectangles.removeFirst(8)
-                                        homeVM.currentRectangle = 1
-                                    }
-                                }
-                                if homeVM.shouldRemoveCollections(passed: homeVM.arrayOfNumbers.count + 1) {
-                                    withAnimation {
-                                        homeVM.arrayOfNumbersFaked.removeFirst(8)
-                                        homeVM.currentCollectionIndex = 1
-                                    }
-                                }
-
-                                print(homeVM.currentRectangle)
-                            } else if homeVM.draggOffset < -20 {
-                                
-                                withAnimation {
-                                    homeVM.arrayRectangles.removeLast()
-//                                    homeVM.insertNextGradientAfter(homeVM.arrayRectangles.last!,
-//                                                                    realCollection: gradients1)
-                                    homeVM.draggOffset = 0
-                                    homeVM.arrayOfNumbersFaked.removeLast()
-                                    homeVM.insertNextCollectionAfter(homeVM.arrayOfNumbersFaked.first,
-                                                                        realCollection: homeVM.arrayOfNumbers)
-                                    print(homeVM.arrayOfNumbersFaked.count)
-                                }
-                            } else {
-                                withAnimation {
-                                    homeVM.draggOffset = 0
-                                }
-                            }
-                        })
-                )
-                .onTapGesture {
-                    print("hello world")
-                    homeVM.openCollection = true
-                }
-                .offset(y: 50)
-            TextField("name of collection", text: $homeVM.text)
-                .customFont(15, .mono)
-                .disabled(!homeVM.settingsMode)
-                .padding(8)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(lineWidth: 1)
-                        .opacity(homeVM.settingsMode ? 1 : 0)
-
-                )
-        }
-        .opacity(homeVM.collecitonIsEqualToCurrent(collection) ? 1 : 0)
-        .frame(width: 200, height: homeVM.fakedQuoteCollections.elementByIndex(homeVM.currentCollectionIndex) != nil ? 160 : 150)
-
-    }
 
 }
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        
-//        @Environment(\.modelContext) var context
-//        @StateObject var homeVM = HomeVM()
-        
-        
         Home()
-//            .onAppear(perform: {
-//                homeVM.fetchCollections()
-//            })
     }
 }
-
-//#Preview {
-//    Home()
-//}

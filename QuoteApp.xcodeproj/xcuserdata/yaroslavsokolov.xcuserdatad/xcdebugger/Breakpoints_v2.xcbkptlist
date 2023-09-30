@@ -3,4 +3,22 @@
    uuid = "48F2CCA3-461C-4EE1-97D6-9FEF333C0AF0"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6ACB279C-701F-46EB-9FB1-09B807CEEC2A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuoteApp/ViewModel/HomeViewModel.swift"
+            startingColumnNumber = "10"
+            endingColumnNumber = "10"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "insertNextRectangleAfter(_:realCollection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

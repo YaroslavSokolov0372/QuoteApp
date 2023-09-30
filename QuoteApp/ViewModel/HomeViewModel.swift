@@ -14,18 +14,20 @@ class HomeVM: ObservableObject {
     
     var modelContext: ModelContext? = nil
     
-    @Published var currentCollectionIndex = 1
     
-    @Published var quoteCollections: [QuoteCollections] = []
+    @Published var quoteCollections: [QuoteCollection] = []
     
-    @Published var fakedQuoteCollections: [QuoteCollections] = []
+    @Published var fakedQuoteCollections: [QuoteCollection] = []
+    
+    @Published var arrayRectanglesFaked: [CustomRectangle] = []
     
     @Published var currentRectangle = 1
     
-    @Published var arrayRectangles: [CustomRectangle] = []
-    
+    @Published var currentCollectionIndex = 1
     
     @Published var text = ""
+    
+    @Published var playBridgeAnimation = true
     
     @Published var openCollection = false
     
@@ -34,13 +36,16 @@ class HomeVM: ObservableObject {
     @Published var draggOffset: CGFloat = 0
     
     
+    
+    
+    
     //MARK: SwiftData service
     
     func currentIndexExist() -> Bool {
         return fakedQuoteCollections.elementByIndex(currentCollectionIndex) != nil
     }
     
-    func collecitonIsEqualToCurrent(_ collection: QuoteCollections?) -> Bool {
+    func collecitonIsEqualToCurrent(_ collection: QuoteCollection?) -> Bool {
         if currentIndexExist() {
             return fakedQuoteCollections[currentCollectionIndex] == collection
         } else {
@@ -49,10 +54,13 @@ class HomeVM: ObservableObject {
     }
 
     func fetchCollections() {
-        let fetchDescriptor = FetchDescriptor<QuoteCollections>()
+        let fetchDescriptor = FetchDescriptor<QuoteCollection>()
         
-        
+        //MARK: if write error the try this or just rename collection which has "ERROR"
+//        ||
+//        ||
 //        quoteCollections = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
+
         
         if modelContext != nil {
             do {
@@ -63,41 +71,16 @@ class HomeVM: ObservableObject {
         }
     }
     
+    
     func setUpFakedCollections() {
         
-            var sortedQuoteCollections: [QuoteCollections] {
+            var sortedQuoteCollections: [QuoteCollection] {
                 return quoteCollections.sorted {
                     $0.formattedDate < $1.formattedDate
                 }
             }
             
             fakedQuoteCollections = sortedQuoteCollections
-        
-        
-//        if fakedQuoteCollections.count == 1 {
-//            
-////            for _ in 0...4 {
-////                if let element = fakedQuoteCollections.first {
-////                    element.changeId = .init()
-////                    fakedQuoteCollections.append(element)
-////                }
-////            }
-//            
-//            
-//        } else if fakedQuoteCollections.count == 2 {
-//            
-//        } else if fakedQuoteCollections.count == 3 {
-//            
-//        } else {
-//            
-//        }
-        
-//        if fakedQuoteCollections.count >= 4 {
-//            for collection in sortedQuoteCollections {
-//                collection.changeId = .init()
-//                fakedQuoteCollections.append(collection)
-//            }
-//        }
         
         }
     
@@ -123,27 +106,6 @@ class HomeVM: ObservableObject {
     }
     
     func deleteCollection() {
-        
-        //        if let indexItem = quoteCollections.firstIndex(where: { $0.formattedDate == fakedQuoteCollections[currentCollectionIndex].formattedDate }) {
-        //
-        //            modelContext?.delete(quoteCollections[indexItem])
-        //            try? modelContext?.save()
-        //
-        //            fetchCollections()
-        //
-        //            setUpFakedCollections()
-        //
-        //            if fakedQuoteCollections.count < 1 {
-        //                currentCollectionIndex = 0
-        //            } else if currentCollectionIndex == fakedQuoteCollections.count {
-        //                currentCollectionIndex -= 1
-        //            }
-        //
-        //            text = ""
-        //            prepareForSettingsMode()
-        //
-        
-        //        }
         
         if currentIndexExist() {
             modelContext?.delete(fakedQuoteCollections[currentCollectionIndex])
@@ -171,7 +133,7 @@ class HomeVM: ObservableObject {
     
     func createNewCollection() {
         
-        let newCollection = QuoteCollections(name: "", quotes: [], id: .init(), datestamp: .now)
+        let newCollection = QuoteCollection(name: "", quotes: [], id: .init(), datestamp: .now)
         
         modelContext?.insert(newCollection)
         try? modelContext?.save()
@@ -196,31 +158,8 @@ class HomeVM: ObservableObject {
 
         
     }
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-
-    
-
-    
-    
-    
-    //MARK: Infinity carousel service
-    
-    var firstFourCollections: [QuoteCollections?] {
+    var firstFourCollections: [QuoteCollection?] {
         return [fakedQuoteCollections.nextElementAfter(currentCollectionIndex + 1) ?? nil,
                 fakedQuoteCollections.nextElementAfter(currentCollectionIndex) ?? nil,
                 fakedQuoteCollections.elementByIndex(currentCollectionIndex) ?? nil,
@@ -229,7 +168,7 @@ class HomeVM: ObservableObject {
         ]
     }
     
-    var firstThreeCollections: [QuoteCollections?] {
+    var firstThreeCollections: [QuoteCollection?] {
         return [
             fakedQuoteCollections.nextElementAfter(currentCollectionIndex) ?? nil,
             fakedQuoteCollections.elementByIndex(currentCollectionIndex) ?? nil,
@@ -237,135 +176,35 @@ class HomeVM: ObservableObject {
         ]
     }
     
-    func predictNextItemAppend<T: ChangeID>(lastItem: T?, realCollection: [T], _ appendIn: inout [T]) {
-        if lastItem != nil {
-            if var indexOfItem = realCollection.firstIndex(where: { $0.changeId == lastItem!.changeId }) {
-                if indexOfItem == realCollection.count - 1 {
-                    indexOfItem = 0
-                    var nextElement = realCollection[indexOfItem]
-                    nextElement.changeId = .init()
-                    appendIn.append(nextElement)
-                } else {
-                    indexOfItem += 1
-                    var nextElement = realCollection[indexOfItem]
-                    nextElement.changeId = .init()
-                    appendIn.append(nextElement)
-                }
-            }
-        }
-    }
-    
-    func predictNextItemInsert<T: ChangeID>(firstItem: T?, realCollection: [T], _ insertIn: inout [T]) {
-        if firstItem != nil {
-            if var indexOfItem = realCollection.firstIndex(where: { $0.changeId == firstItem!.changeId }) {
-                if indexOfItem == 0 {
-                    indexOfItem = realCollection.count - 1
-                    var nextElement = realCollection[indexOfItem]
-                    nextElement.changeId = .init()
-                    insertIn.insert(nextElement, at: 0)
-                } else {
-                    indexOfItem -= 1
-                    var nextElement = realCollection[indexOfItem]
-                    nextElement.changeId = .init()
-                    insertIn.insert(nextElement, at: 0)
-                }
-            }
-        }
-    }
-    
-    func shouldRemoveElements<T:ChangeID>(afterPassed: Int, collection: [T], currentIndex: Int) -> Bool {
-        var passedCount = 0
-        for index in collection.indices {
-            if index < currentIndex {
-                passedCount += 1
-            }
-        }
-        return passedCount >= afterPassed
-    }
-
-    
-    //MARK: Func for Infinity Carousel
-    
-    //MARK: - Temporary collection in type of Int
-    
-    @Published var arrayOfNumbers = [CollectionModel(num: 07),
-                                     CollectionModel(num: 12),
-                                     CollectionModel(num: 32),
-                                     CollectionModel(num: 14),
-                                     CollectionModel(num: 42),
-                                     CollectionModel(num: 02),
-                                     CollectionModel(num: 01),
-                                     CollectionModel(num: 10)
-    ]
-    
-    @Published var arrayOfNumbersFaked: [CollectionModel] = []
-    
-    func appendNextCollectionAfter(_ lastItem: CollectionModel?) {
+    func insertNextRectangleAfter(_ firstItem: CustomRectangle, realCollection: [CustomRectangle]) {
         
-        if lastItem != nil {
-            if var itemIndex = arrayOfNumbers.firstIndex(where: { $0.num == lastItem!.num }) {
-                if itemIndex == arrayOfNumbers.count - 1 {
-                    itemIndex = 0
-                    var nextElement = arrayOfNumbers[itemIndex]
-                    nextElement.id = .init()
-                    arrayOfNumbersFaked.append(nextElement)
-                } else {
-                    itemIndex += 1
-                    var nextElement = arrayOfNumbers[itemIndex]
-                    nextElement.id = .init()
-                    arrayOfNumbersFaked.append(nextElement)
-                }
+        if var itemIndex = realCollection.firstIndex(where: { $0.color == firstItem.color }) {
+            if itemIndex == 0 {
+                itemIndex = realCollection.count - 1
+                arrayRectanglesFaked.insert(CustomRectangle(changeId: .init(), color: realCollection[itemIndex].color), at: 0)
+            } else {
+                arrayRectanglesFaked.insert(CustomRectangle(changeId: .init(), color: realCollection[itemIndex - 1].color), at: 0)
             }
         }
     }
-    
-    func insertNextCollectionAfter(_ firstItem: CollectionModel?, realCollection: [CollectionModel]) {
-        if firstItem != nil {
-            if var itemIndex = realCollection.firstIndex(where: { $0.num == firstItem!.num }) {
-                if itemIndex == 0 {
-                    itemIndex = realCollection.count - 1
-                    var nextElement = realCollection[itemIndex]
-                    nextElement.id = .init()
-                    arrayOfNumbersFaked.insert(nextElement, at: 0)
-                } else {
-                    itemIndex -= 1
-                    var nextElement = realCollection[itemIndex]
-                    nextElement.id = .init()
-                    arrayOfNumbersFaked.insert(nextElement, at: 0)
-                }
-            }
-        }
-    }
-    
-//    func insertNextGradientAfter(_ lastItem: CustomRectangle, realCollection: [LinearGradient]) {
-//        
-//        if var itemIndex = realCollection.firstIndex(where: { $0 == lastItem.color }) {
-//            if itemIndex == 0 {
-//                itemIndex = realCollection.count - 1
-//                arrayRectangles.insert(CustomRectangle(changeId: .init(), color: realCollection[itemIndex]), at: 0)
-//            } else {
-//                arrayRectangles.insert(CustomRectangle(changeId: .init(), color: realCollection[itemIndex - 1]), at: 0)
-//            }
-//        }
-//    }
 
-//    func appentNextGradientAfter(_ lastItem: CustomRectangle, realCollection: [LinearGradient]) {
-//        
-//        if var itemIndex = realCollection.firstIndex(where: { $0 == lastItem.color }) {
-//            if itemIndex == realCollection.count - 1 {
-//                itemIndex = 0
-//                arrayRectangles.append(CustomRectangle(changeId: .init(), color: realCollection[itemIndex]))
-//            } else {
-//                itemIndex += 1
-//                arrayRectangles.append(CustomRectangle(changeId: .init(), color: realCollection[itemIndex]))
-//            }
-//        }
-//        
-//    }
+    func appentNextRectangleAfter(_ lastItem: CustomRectangle, realCollection: [CustomRectangle]) {
+        
+        if var itemIndex = realCollection.firstIndex(where: { $0.color == lastItem.color }) {
+            if itemIndex == realCollection.count - 1 {
+                itemIndex = 0
+                arrayRectanglesFaked.append(CustomRectangle(changeId: .init(), color: realCollection[itemIndex].color))
+            } else {
+                itemIndex += 1
+                arrayRectanglesFaked.append(CustomRectangle(changeId: .init(), color: realCollection[itemIndex].color))
+            }
+        }
+        
+    }
     
     func shouldRemoveRectangles(passed: Int) -> Bool {
         var passedCount = 0
-        for index in arrayRectangles.indices {
+        for index in arrayRectanglesFaked.indices {
             if index < currentRectangle {
                 passedCount += 1
             }
@@ -373,32 +212,5 @@ class HomeVM: ObservableObject {
         return passedCount >= passed
     }
     
-    func shouldRemoveCollections(passed: Int) -> Bool {
-        var passedCount = 0
-        for index in arrayOfNumbersFaked.indices {
-            if index < currentCollectionIndex {
-                passedCount += 1
-            }
-        }
-        return passedCount >= passed
-    }
 
-//    var sortedArrayOfNumbers: [CollectionModel?] {
-//        return [arrayOfNumbersFaked.nextElementAfter(currentCollectionIndex + 1) ?? nil,
-//                arrayOfNumbersFaked.nextElementAfter(currentCollectionIndex) ?? nil,
-//                arrayOfNumbersFaked[currentCollectionIndex],
-//                arrayOfNumbersFaked.elementBefore(currentCollectionIndex) ?? nil
-//        ]
-//    }
-    
-    var sortedArrayOfNumbersFilled: [CollectionModel?] {
-        return [
-            arrayOfNumbersFaked.nextElementAfter(currentCollectionIndex) ?? nil,
-            arrayOfNumbersFaked[currentCollectionIndex],
-            arrayOfNumbersFaked.elementBefore(currentCollectionIndex) ?? nil
-        ]
-    }
-    
 }
-
-

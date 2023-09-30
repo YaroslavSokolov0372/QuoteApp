@@ -1,8 +1,8 @@
 //
-//  QuoteModel.swift
+//  QuoteCollection.swift
 //  QuoteApp
 //
-//  Created by Yaroslav Sokolov on 17/09/2023.
+//  Created by Yaroslav Sokolov on 29/09/2023.
 //
 
 import Foundation
@@ -10,15 +10,13 @@ import SwiftUI
 import SwiftData
 
 
-
 @Model
-class Quote: Identifiable, ChangeID, Equatable {
+class QuoteCollection: Identifiable, ChangeID {
     
     var changeId = UUID()
-    var quote: String
-    var whomQuote: String
+    var name: String
     var datestamp: Date
-    var resource: String
+    @Relationship var quotes: [Quote]
     var id: UUID {
         return changeId
     }
@@ -30,14 +28,9 @@ class Quote: Identifiable, ChangeID, Equatable {
 
     }
     
-    init(quote: String, whomQuote: String, datestamp: Date, resource: String) {
-        self.quote = quote
-        self.whomQuote = whomQuote
+    init(name: String, quotes: [Quote], id: UUID = .init(), datestamp: Date) {
+        self.name = name
+        self.quotes = quotes
         self.datestamp = datestamp
-        self.resource = resource
     }
 }
-
-
-
-

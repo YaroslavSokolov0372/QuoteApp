@@ -8,11 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		D14FF9A72ABC43FB006D5161 /* LinearGradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14FF9A62ABC43FB006D5161 /* LinearGradientExtension.swift */; };
-		D14FF9A92ABC753B006D5161 /* CollectionModelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14FF9A82ABC753B006D5161 /* CollectionModelExample.swift */; };
+		D1969A772AC5B544008B1916 /* BindingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1969A762AC5B544008B1916 /* BindingExtension.swift */; };
+		D1969A7A2AC6E31A008B1916 /* ChangeID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1969A792AC6E31A008B1916 /* ChangeID.swift */; };
+		D1969A7C2AC6E3A5008B1916 /* QuoteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1969A7B2AC6E3A5008B1916 /* QuoteCollection.swift */; };
+		D1969ABE2AC7260A008B1916 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1969A832AC6F78D008B1916 /* WidgetKit.framework */; };
+		D1969ABF2AC7260A008B1916 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1969A852AC6F78D008B1916 /* SwiftUI.framework */; };
+		D1969AC22AC7260A008B1916 /* QuoteWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1969AC12AC7260A008B1916 /* QuoteWidgetBundle.swift */; };
+		D1969AC42AC7260A008B1916 /* QuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1969AC32AC7260A008B1916 /* QuoteWidget.swift */; };
+		D1969AC62AC7260B008B1916 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1969AC52AC7260B008B1916 /* Assets.xcassets */; };
+		D1969ACA2AC7260B008B1916 /* QuoteWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D1969ABD2AC7260A008B1916 /* QuoteWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D1969ACE2AC726A9008B1916 /* QuoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6BF2AB760710017B24C /* QuoteModel.swift */; };
+		D1969ACF2AC726A9008B1916 /* QuoteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1969A7B2AC6E3A5008B1916 /* QuoteCollection.swift */; };
+		D1969AD02AC7270C008B1916 /* ChangeID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1969A792AC6E31A008B1916 /* ChangeID.swift */; };
+		D1969AD62AC85555008B1916 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC472AACE27D002F954D /* Fonts.swift */; };
+		D1969AD72AC869D0008B1916 /* GradientColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC352AACBEF7002F954D /* GradientColors.swift */; };
+		D1969AD82AC869F9008B1916 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */; };
+		D1969AD92AC86A49008B1916 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1D7E8A52A9F7E530087CFD3 /* Assets.xcassets */; };
+		D1969ADA2AC86C0D008B1916 /* ApproachMonoTRIAL-Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4D2AACE9C1002F954D /* ApproachMonoTRIAL-Md.ttf */; };
+		D1969ADB2AC86C0D008B1916 /* Halenoir-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */; };
+		D1969ADC2AC86C0D008B1916 /* Halenoir-BlackOutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4C2AACE9C1002F954D /* Halenoir-BlackOutline.ttf */; };
 		D19C6C3D2AA08DB5004E4D58 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */; };
-		D1B837EC2AB88F96001BDC0A /* RemakeHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837EB2AB88F95001BDC0A /* RemakeHomeView.swift */; };
 		D1B837EE2AB9A6FA001BDC0A /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */; };
-		D1B837F02AB9A766001BDC0A /* HomeViewSketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B837EF2AB9A766001BDC0A /* HomeViewSketch.swift */; };
 		D1C4BC362AACBEF7002F954D /* GradientColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC352AACBEF7002F954D /* GradientColors.swift */; };
 		D1C4BC482AACE27D002F954D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC472AACE27D002F954D /* Fonts.swift */; };
 		D1C4BC492AACE27D002F954D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BC472AACE27D002F954D /* Fonts.swift */; };
@@ -28,22 +44,26 @@
 		D1C4BC572AACE9C1002F954D /* Halenoir-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */; };
 		D1C8B6B22AB355FF0017B24C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6B12AB355FF0017B24C /* HomeViewModel.swift */; };
 		D1C8B6B82AB4CB830017B24C /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6B72AB4CB830017B24C /* ViewExtension.swift */; };
-		D1C8B6BC2AB603B80017B24C /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6BB2AB603B80017B24C /* CollectionView.swift */; };
 		D1C8B6BE2AB63C1D0017B24C /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6BD2AB63C1D0017B24C /* CollectionViewModel.swift */; };
 		D1C8B6C02AB760710017B24C /* QuoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6BF2AB760710017B24C /* QuoteModel.swift */; };
-		D1C8B6C42AB86D870017B24C /* CllectionViewSketchToOriginal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6C32AB86D870017B24C /* CllectionViewSketchToOriginal.swift */; };
+		D1C8B6C42AB86D870017B24C /* CllectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C8B6C32AB86D870017B24C /* CllectionView.swift */; };
 		D1D7E8A22A9F7E530087CFD3 /* QuoteAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8A12A9F7E530087CFD3 /* QuoteAppApp.swift */; };
-		D1D7E8A42A9F7E530087CFD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8A32A9F7E530087CFD3 /* ContentView.swift */; };
 		D1D7E8A62A9F7E530087CFD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1D7E8A52A9F7E530087CFD3 /* Assets.xcassets */; };
 		D1D7E8A92A9F7E530087CFD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1D7E8A82A9F7E530087CFD3 /* Preview Assets.xcassets */; };
 		D1D7E8B82A9F7E530087CFD3 /* QuoteAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8B72A9F7E530087CFD3 /* QuoteAppTests.swift */; };
 		D1D7E8C22A9F7E530087CFD3 /* QuoteAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8C12A9F7E530087CFD3 /* QuoteAppUITests.swift */; };
 		D1D7E8C42A9F7E530087CFD3 /* QuoteAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8C32A9F7E530087CFD3 /* QuoteAppUITestsLaunchTests.swift */; };
 		D1D7E8D52A9F7EE50087CFD3 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7E8D42A9F7EE50087CFD3 /* Home.swift */; };
-		D1F259F32AC181C200FB50E9 /* ScrollExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F259F22AC181C200FB50E9 /* ScrollExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D1969AC82AC7260B008B1916 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D7E8962A9F7E530087CFD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D1969ABC2AC7260A008B1916;
+			remoteInfo = QuoteWidgetExtension;
+		};
 		D1D7E8B42A9F7E530087CFD3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1D7E8962A9F7E530087CFD3 /* Project object */;
@@ -60,13 +80,36 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D1969A992AC6F791008B1916 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D1969ACA2AC7260B008B1916 /* QuoteWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D14FF9A62ABC43FB006D5161 /* LinearGradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientExtension.swift; sourceTree = "<group>"; };
-		D14FF9A82ABC753B006D5161 /* CollectionModelExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModelExample.swift; sourceTree = "<group>"; };
+		D1969A762AC5B544008B1916 /* BindingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtension.swift; sourceTree = "<group>"; };
+		D1969A792AC6E31A008B1916 /* ChangeID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeID.swift; sourceTree = "<group>"; };
+		D1969A7B2AC6E3A5008B1916 /* QuoteCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollection.swift; sourceTree = "<group>"; };
+		D1969A832AC6F78D008B1916 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		D1969A852AC6F78D008B1916 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		D1969ABD2AC7260A008B1916 /* QuoteWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QuoteWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1969AC12AC7260A008B1916 /* QuoteWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidgetBundle.swift; sourceTree = "<group>"; };
+		D1969AC32AC7260A008B1916 /* QuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidget.swift; sourceTree = "<group>"; };
+		D1969AC52AC7260B008B1916 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D1969AC72AC7260B008B1916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1969AD42AC74016008B1916 /* QuoteApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuoteApp.entitlements; sourceTree = "<group>"; };
+		D1969AD52AC74023008B1916 /* QuoteWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuoteWidgetExtension.entitlements; sourceTree = "<group>"; };
 		D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
-		D1B837EB2AB88F95001BDC0A /* RemakeHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemakeHomeView.swift; sourceTree = "<group>"; };
 		D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
-		D1B837EF2AB9A766001BDC0A /* HomeViewSketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewSketch.swift; sourceTree = "<group>"; };
 		D1C4BC352AACBEF7002F954D /* GradientColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColors.swift; sourceTree = "<group>"; };
 		D1C4BC472AACE27D002F954D /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		D1C4BC4B2AACE39B002F954D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -75,13 +118,11 @@
 		D1C4BC4E2AACE9C1002F954D /* Halenoir-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Halenoir-Black.ttf"; sourceTree = "<group>"; };
 		D1C8B6B12AB355FF0017B24C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		D1C8B6B72AB4CB830017B24C /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
-		D1C8B6BB2AB603B80017B24C /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		D1C8B6BD2AB63C1D0017B24C /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		D1C8B6BF2AB760710017B24C /* QuoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteModel.swift; sourceTree = "<group>"; };
-		D1C8B6C32AB86D870017B24C /* CllectionViewSketchToOriginal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CllectionViewSketchToOriginal.swift; sourceTree = "<group>"; };
+		D1C8B6C32AB86D870017B24C /* CllectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CllectionView.swift; sourceTree = "<group>"; };
 		D1D7E89E2A9F7E530087CFD3 /* QuoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D7E8A12A9F7E530087CFD3 /* QuoteAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteAppApp.swift; sourceTree = "<group>"; };
-		D1D7E8A32A9F7E530087CFD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D1D7E8A52A9F7E530087CFD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1D7E8A82A9F7E530087CFD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D1D7E8B32A9F7E530087CFD3 /* QuoteAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuoteAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,10 +131,18 @@
 		D1D7E8C12A9F7E530087CFD3 /* QuoteAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteAppUITests.swift; sourceTree = "<group>"; };
 		D1D7E8C32A9F7E530087CFD3 /* QuoteAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D1D7E8D42A9F7EE50087CFD3 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		D1F259F22AC181C200FB50E9 /* ScrollExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D1969ABA2AC7260A008B1916 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1969ABF2AC7260A008B1916 /* SwiftUI.framework in Frameworks */,
+				D1969ABE2AC7260A008B1916 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D1D7E89B2A9F7E530087CFD3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,12 +167,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D1969A782AC6E30A008B1916 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D1969A792AC6E31A008B1916 /* ChangeID.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D1969A822AC6F78D008B1916 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1969A832AC6F78D008B1916 /* WidgetKit.framework */,
+				D1969A852AC6F78D008B1916 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D1969AC02AC7260A008B1916 /* QuoteWidget */ = {
+			isa = PBXGroup;
+			children = (
+				D1969AC12AC7260A008B1916 /* QuoteWidgetBundle.swift */,
+				D1969AC32AC7260A008B1916 /* QuoteWidget.swift */,
+				D1969AC52AC7260B008B1916 /* Assets.xcassets */,
+				D1969AC72AC7260B008B1916 /* Info.plist */,
+			);
+			path = QuoteWidget;
+			sourceTree = "<group>";
+		};
 		D19C6C3B2AA08DA2004E4D58 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				D19C6C3C2AA08DB5004E4D58 /* ArrayExtension.swift */,
 				D1C8B6B72AB4CB830017B24C /* ViewExtension.swift */,
 				D14FF9A62ABC43FB006D5161 /* LinearGradientExtension.swift */,
+				D1969A762AC5B544008B1916 /* BindingExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -141,9 +219,12 @@
 		D1D7E8952A9F7E530087CFD3 = {
 			isa = PBXGroup;
 			children = (
+				D1969AD52AC74023008B1916 /* QuoteWidgetExtension.entitlements */,
 				D1D7E8A02A9F7E530087CFD3 /* QuoteApp */,
 				D1D7E8B62A9F7E530087CFD3 /* QuoteAppTests */,
 				D1D7E8C02A9F7E530087CFD3 /* QuoteAppUITests */,
+				D1969AC02AC7260A008B1916 /* QuoteWidget */,
+				D1969A822AC6F78D008B1916 /* Frameworks */,
 				D1D7E89F2A9F7E530087CFD3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -154,6 +235,7 @@
 				D1D7E89E2A9F7E530087CFD3 /* QuoteApp.app */,
 				D1D7E8B32A9F7E530087CFD3 /* QuoteAppTests.xctest */,
 				D1D7E8BD2A9F7E530087CFD3 /* QuoteAppUITests.xctest */,
+				D1969ABD2AC7260A008B1916 /* QuoteWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,11 +243,13 @@
 		D1D7E8A02A9F7E530087CFD3 /* QuoteApp */ = {
 			isa = PBXGroup;
 			children = (
-				D1C4BC5C2AAF2007002F954D /* Fonts */,
+				D1969AD42AC74016008B1916 /* QuoteApp.entitlements */,
 				D19C6C3B2AA08DA2004E4D58 /* Extension */,
-				D1D7E8D32A9F7EDA0087CFD3 /* ViewModel */,
+				D1C4BC5C2AAF2007002F954D /* Fonts */,
+				D1969A782AC6E30A008B1916 /* Protocols */,
 				D1D7E8D22A9F7ED10087CFD3 /* Model */,
 				D1D7E8D12A9F7EC20087CFD3 /* View */,
+				D1D7E8D32A9F7EDA0087CFD3 /* ViewModel */,
 				D1D7E8A52A9F7E530087CFD3 /* Assets.xcassets */,
 				D1C4BC4B2AACE39B002F954D /* Info.plist */,
 				D1D7E8A72A9F7E530087CFD3 /* Preview Content */,
@@ -202,13 +286,8 @@
 			isa = PBXGroup;
 			children = (
 				D1D7E8A12A9F7E530087CFD3 /* QuoteAppApp.swift */,
-				D1D7E8A32A9F7E530087CFD3 /* ContentView.swift */,
 				D1D7E8D42A9F7EE50087CFD3 /* Home.swift */,
-				D1F259F22AC181C200FB50E9 /* ScrollExample.swift */,
-				D1C8B6BB2AB603B80017B24C /* CollectionView.swift */,
-				D1C8B6C32AB86D870017B24C /* CllectionViewSketchToOriginal.swift */,
-				D1B837EB2AB88F95001BDC0A /* RemakeHomeView.swift */,
-				D1B837EF2AB9A766001BDC0A /* HomeViewSketch.swift */,
+				D1C8B6C32AB86D870017B24C /* CllectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,8 +298,8 @@
 				D1C4BC472AACE27D002F954D /* Fonts.swift */,
 				D1C4BC352AACBEF7002F954D /* GradientColors.swift */,
 				D1C8B6BF2AB760710017B24C /* QuoteModel.swift */,
+				D1969A7B2AC6E3A5008B1916 /* QuoteCollection.swift */,
 				D1B837ED2AB9A6FA001BDC0A /* CustomRectangle.swift */,
-				D14FF9A82ABC753B006D5161 /* CollectionModelExample.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,6 +316,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D1969ABC2AC7260A008B1916 /* QuoteWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1969ACB2AC7260B008B1916 /* Build configuration list for PBXNativeTarget "QuoteWidgetExtension" */;
+			buildPhases = (
+				D1969AB92AC7260A008B1916 /* Sources */,
+				D1969ABA2AC7260A008B1916 /* Frameworks */,
+				D1969ABB2AC7260A008B1916 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuoteWidgetExtension;
+			productName = QuoteWidgetExtension;
+			productReference = D1969ABD2AC7260A008B1916 /* QuoteWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		D1D7E89D2A9F7E530087CFD3 /* QuoteApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1D7E8C72A9F7E530087CFD3 /* Build configuration list for PBXNativeTarget "QuoteApp" */;
@@ -244,10 +340,12 @@
 				D1D7E89A2A9F7E530087CFD3 /* Sources */,
 				D1D7E89B2A9F7E530087CFD3 /* Frameworks */,
 				D1D7E89C2A9F7E530087CFD3 /* Resources */,
+				D1969A992AC6F791008B1916 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D1969AC92AC7260B008B1916 /* PBXTargetDependency */,
 			);
 			name = QuoteApp;
 			productName = QuoteApp;
@@ -297,9 +395,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					D1969ABC2AC7260A008B1916 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					D1D7E89D2A9F7E530087CFD3 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -329,11 +430,24 @@
 				D1D7E89D2A9F7E530087CFD3 /* QuoteApp */,
 				D1D7E8B22A9F7E530087CFD3 /* QuoteAppTests */,
 				D1D7E8BC2A9F7E530087CFD3 /* QuoteAppUITests */,
+				D1969ABC2AC7260A008B1916 /* QuoteWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D1969ABB2AC7260A008B1916 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1969ADA2AC86C0D008B1916 /* ApproachMonoTRIAL-Md.ttf in Resources */,
+				D1969ADB2AC86C0D008B1916 /* Halenoir-Black.ttf in Resources */,
+				D1969ADC2AC86C0D008B1916 /* Halenoir-BlackOutline.ttf in Resources */,
+				D1969AD92AC86A49008B1916 /* Assets.xcassets in Resources */,
+				D1969AC62AC7260B008B1916 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D1D7E89C2A9F7E530087CFD3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,27 +483,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D1969AB92AC7260A008B1916 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1969AD62AC85555008B1916 /* Fonts.swift in Sources */,
+				D1969ACE2AC726A9008B1916 /* QuoteModel.swift in Sources */,
+				D1969AC42AC7260A008B1916 /* QuoteWidget.swift in Sources */,
+				D1969ACF2AC726A9008B1916 /* QuoteCollection.swift in Sources */,
+				D1969AC22AC7260A008B1916 /* QuoteWidgetBundle.swift in Sources */,
+				D1969AD02AC7270C008B1916 /* ChangeID.swift in Sources */,
+				D1969AD72AC869D0008B1916 /* GradientColors.swift in Sources */,
+				D1969AD82AC869F9008B1916 /* CustomRectangle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D1D7E89A2A9F7E530087CFD3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1969A7C2AC6E3A5008B1916 /* QuoteCollection.swift in Sources */,
 				D1C8B6C02AB760710017B24C /* QuoteModel.swift in Sources */,
 				D1C4BC482AACE27D002F954D /* Fonts.swift in Sources */,
 				D1C4BC362AACBEF7002F954D /* GradientColors.swift in Sources */,
 				D1C8B6BE2AB63C1D0017B24C /* CollectionViewModel.swift in Sources */,
-				D14FF9A92ABC753B006D5161 /* CollectionModelExample.swift in Sources */,
 				D1C8B6B22AB355FF0017B24C /* HomeViewModel.swift in Sources */,
-				D1C8B6BC2AB603B80017B24C /* CollectionView.swift in Sources */,
 				D1D7E8D52A9F7EE50087CFD3 /* Home.swift in Sources */,
 				D19C6C3D2AA08DB5004E4D58 /* ArrayExtension.swift in Sources */,
-				D1D7E8A42A9F7E530087CFD3 /* ContentView.swift in Sources */,
+				D1969A772AC5B544008B1916 /* BindingExtension.swift in Sources */,
 				D14FF9A72ABC43FB006D5161 /* LinearGradientExtension.swift in Sources */,
 				D1C8B6B82AB4CB830017B24C /* ViewExtension.swift in Sources */,
-				D1B837EC2AB88F96001BDC0A /* RemakeHomeView.swift in Sources */,
-				D1F259F32AC181C200FB50E9 /* ScrollExample.swift in Sources */,
+				D1969A7A2AC6E31A008B1916 /* ChangeID.swift in Sources */,
 				D1B837EE2AB9A6FA001BDC0A /* CustomRectangle.swift in Sources */,
-				D1B837F02AB9A766001BDC0A /* HomeViewSketch.swift in Sources */,
-				D1C8B6C42AB86D870017B24C /* CllectionViewSketchToOriginal.swift in Sources */,
+				D1C8B6C42AB86D870017B24C /* CllectionView.swift in Sources */,
 				D1D7E8A22A9F7E530087CFD3 /* QuoteAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +542,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D1969AC92AC7260B008B1916 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D1969ABC2AC7260A008B1916 /* QuoteWidgetExtension */;
+			targetProxy = D1969AC82AC7260B008B1916 /* PBXContainerItemProxy */;
+		};
 		D1D7E8B52A9F7E530087CFD3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D1D7E89D2A9F7E530087CFD3 /* QuoteApp */;
@@ -429,6 +560,73 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D1969ACC2AC7260B008B1916 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = QuoteWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuoteWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QuoteWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yaroslavSokolov.QuoteApp.QuoteWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D1969ACD2AC7260B008B1916 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = QuoteWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuoteWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QuoteWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yaroslavSokolov.QuoteApp.QuoteWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		D1D7E8C52A9F7E530087CFD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -479,7 +677,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -533,7 +731,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -546,19 +744,22 @@
 		D1D7E8C82A9F7E530087CFD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuoteApp/QuoteApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"QuoteApp/Preview Content\"";
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QuoteApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -576,19 +777,22 @@
 		D1D7E8C92A9F7E530087CFD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuoteApp/QuoteApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"QuoteApp/Preview Content\"";
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QuoteApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -610,6 +814,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
@@ -629,6 +834,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
@@ -647,6 +853,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = yaroslavSokolov.QuoteAppUITests;
@@ -664,6 +871,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTJACLKKSJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = yaroslavSokolov.QuoteAppUITests;
@@ -678,6 +886,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D1969ACB2AC7260B008B1916 /* Build configuration list for PBXNativeTarget "QuoteWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1969ACC2AC7260B008B1916 /* Debug */,
+				D1969ACD2AC7260B008B1916 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D1D7E8992A9F7E530087CFD3 /* Build configuration list for PBXProject "QuoteApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

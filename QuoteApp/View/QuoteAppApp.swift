@@ -13,14 +13,11 @@ struct QuoteAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             Home()
-                .modelContainer(for: [QuoteCollections.self, Quote.self])
-//            RemakeHomeView()
-//            HomeViewSketch()
-//            RemakeHomeView()
-                
         }
+        .modelContainer(for: [QuoteCollection.self, Quote.self])
     }
 }
+
+
+

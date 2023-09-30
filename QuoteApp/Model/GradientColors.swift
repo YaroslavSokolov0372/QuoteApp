@@ -9,6 +9,19 @@ import Foundation
 import SwiftUI
 
 
+//MARK: Main that I use now
+var customRectanglesArray = [
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("ThirdSet5"), Color("ThirdSet6")], startPoint: .topLeading, endPoint: .bottomTrailing)),
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("ThirdSet3"), Color("ThirdSet4")], startPoint: .topLeading, endPoint: .bottomTrailing)),
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("ThirdSet2"), Color("ThirdSet1")], startPoint: .topLeading, endPoint: .bottomTrailing)),
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("SecondSet"), Color("ThirdSet")], startPoint: .topLeading, endPoint: .bottomTrailing)),
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("Color9"), Color("Color10")], startPoint: .topLeading, endPoint: .bottomTrailing)),
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("SecondSet2"), Color("SecondSet")], startPoint: .topLeading, endPoint: .bottomTrailing)),
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("SecondSet"), Color("NewColor2")], startPoint: .topLeading, endPoint: .bottomTrailing)),
+    CustomRectangle(changeId: .init(), color: LinearGradient(colors: [Color("NewColor"), Color("NewColor2")], startPoint: .topLeading, endPoint: .bottomTrailing))
+    ]
+
+//MARK: Those are just another variants of colors
 var gradients1: [CustomRectangle] = [CustomRectangle(changeId: .init(), color: LinearGradient(
                                    stops: [
                                    Gradient.Stop(color: Color(red: 0.86, green: 0.82, blue: 0.76), location: 0.00),
@@ -83,7 +96,7 @@ var gradients1: [CustomRectangle] = [CustomRectangle(changeId: .init(), color: L
                                    )),
                                 ]
 
-var gradients: [LinearGradient] = [
+var gradients2: [LinearGradient] = [
     LinearGradient(colors: [Color("Color7"), Color("Color8")], startPoint: .topLeading, endPoint: .bottomTrailing),
     LinearGradient(colors: [Color("Color9"), Color("Color10")], startPoint: .topLeading, endPoint: .bottomTrailing),
     LinearGradient(colors: [Color("Color11"), Color("Color12")], startPoint: .topLeading, endPoint: .bottomTrailing),
